@@ -3,7 +3,6 @@
 namespace SclNominetEpp\Traits;
 
 use DateTime;
-use DateTimeInterface;
 
 trait UpDateTrait
 {
