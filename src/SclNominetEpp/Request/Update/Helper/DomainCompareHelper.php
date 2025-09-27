@@ -4,8 +4,11 @@ namespace SclNominetEpp\Request\Update\Helper;
 
 class DomainCompareHelper
 {
-    public static function compare(object $a, object $b): bool
+    public static function compare(object $a, object $b): int
     {
-        return ($a == $b);
+        if ($a == $b) {
+            return 0;
+        }
+        return ($a < $b) ? -1 : 1;
     }
 }
