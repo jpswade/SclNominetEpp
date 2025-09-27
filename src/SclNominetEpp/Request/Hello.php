@@ -24,7 +24,7 @@ class Hello extends Request
      *
      * @return type
      */
-    public function getPacket()
+    public function getPacket(): ?string
     {
         if (null !== $this->output) {
             return $this->output;
