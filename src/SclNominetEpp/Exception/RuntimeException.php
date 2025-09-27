@@ -4,12 +4,19 @@ namespace SclNominetEpp\Exception;
 
 /**
  * RuntimeException
- *
- * @author Tom Oram <tom@scl.co.uk>
  */
 class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
-    public static function unexpectedResultCode($code, $message)
+    /**
+     * Create and throw a RuntimeException for unexpected result codes.
+     *
+     * @param integer $code    The unexpected result code.
+     * @param string  $message The error message.
+     *
+     * @throws RuntimeException Always throws this exception.
+     * @return void
+     */
+    public static function unexpectedResultCode(int $code, string $message): void
     {
         throw new self("Unexpected result code: $code, message: $message");
     }

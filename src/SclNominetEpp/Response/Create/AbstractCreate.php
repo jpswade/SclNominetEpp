@@ -8,8 +8,6 @@ use SimpleXMLElement;
 
 /**
  * This class interprets XML for a Nominet EPP <create> command response.
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 abstract class AbstractCreate extends Response
 {

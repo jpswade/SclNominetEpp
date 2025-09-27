@@ -7,14 +7,10 @@ use SclNominetEpp\Contact as ContactObject;
 
 /**
  * Page-Level DocBlock
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 
 /**
  * This class build the XML for a Nominet EPP contact:info command.
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 class Contact extends AbstractInfo
 {

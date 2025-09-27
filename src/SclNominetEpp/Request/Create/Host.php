@@ -9,8 +9,6 @@ use SimpleXMLElement;
 
 /**
  * This class build the XML for a Nominet EPP host:create command.
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 class Host extends AbstractCreate
 {

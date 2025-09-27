@@ -3,6 +3,7 @@
 namespace SclNominetEpp\Response\Check;
 
 use SclNominetEpp\Response\Check\Contact as CheckContact;
+use SclNominetEpp\Response;
 
 /**
  * contact:check response test

@@ -8,8 +8,6 @@ use SimpleXMLElement;
 
 /**
  * This class build the XML for a Nominet EPP domain:info command.
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 class Domain extends AbstractInfo
 {

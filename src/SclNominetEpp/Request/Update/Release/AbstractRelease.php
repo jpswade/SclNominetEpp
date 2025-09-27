@@ -7,57 +7,45 @@ use SimpleXMLElement;
 
 /**
  * This class build the XML for a Nominet EPP r:release command.
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 abstract class AbstractRelease extends Request
 {
     /**
      * The value of the check Identifier.
-     *
-     * @var string
      */
-    protected $value = '';
+    protected string $value = '';
 
     /**
      * The type of check this is.
-     *
-     * @var string
      */
-    private $type;
+    private string $type;
 
     /**
-     * The namespace of update
-     *
-     * @var string
+     * The namespace of update.
      */
-    private $updateNamespace;
+    private string $updateNamespace;
 
     /**
-     * The name of the check Identifier (e.g. 'id', 'name')
-     *
-     * @var string
+     * The name of the check Identifier (e.g. 'id', 'name').
      */
-    private $valueName;
+    private string $valueName;
 
     /**
      * This is the tag the domain name is currently on.
      * When used with a release or transfer operation,
      * this is the tag of the registrar receiving the domain name.
-     *
-     * @var mixed
      */
-    private $registrarTag;
+    private string $registrarTag;
 
     /**
      * Constructor
      *
-     * @param string           $type
-     * @param string           $updateNamespace
-     * @param string           $valueName
-     * @param SimpleXMLElement $response
+     * @param string                $type            The type of release operation.
+     * @param string                $updateNamespace The namespace for the update operation.
+     * @param string                $valueName       The name of the value being updated.
+     * @param SimpleXMLElement|null $response        The response object.
      */
-    public function __construct($type, $updateNamespace, $valueName, $response = null)
+    public function __construct(string $type, string $updateNamespace, string $valueName, $response = null)
     {
         parent::__construct('update', $response);
         $this->type  = $type;
@@ -68,9 +56,10 @@ abstract class AbstractRelease extends Request
     /**
      * SetValue
      *
-     * @param  string $value
+     * @param string $value The value to set.
+     * @return static
      */
-    public function lookup($value)
+    public function lookup(string $value)
     {
         $this->value = $value;
 
@@ -78,11 +67,12 @@ abstract class AbstractRelease extends Request
     }
 
     /**
-     * Set the tag for the current demain name
+     * Set the tag for the current domain name
      *
-     * @param type $registrarTag
+     * @param string $registrarTag The registrar tag.
+     * @return void
      */
-    public function setRegistrarTag($registrarTag)
+    public function setRegistrarTag(string $registrarTag): void
     {
         $this->registrarTag = $registrarTag;
     }
@@ -90,9 +80,10 @@ abstract class AbstractRelease extends Request
     /**
      * Add content to the request form.
      *
-     * @param \SimpleXMLElement $action
+     * @param SimpleXMLElement $action The XML action element.
+     * @return void
      */
-    public function addContent(\SimpleXMLElement $action)
+    public function addContent(SimpleXMLElement $action)
     {
         $releaseNS  = $this->updateNamespace;
 

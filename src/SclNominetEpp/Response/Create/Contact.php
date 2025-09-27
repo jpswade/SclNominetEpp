@@ -7,8 +7,6 @@ use SclNominetEpp\Contact as ContactObject;
 /**
  * This class gives AbstractCreate information to interpret XML
  * for a Nominet EPP host:create command response.
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 class Contact extends AbstractCreate
 {

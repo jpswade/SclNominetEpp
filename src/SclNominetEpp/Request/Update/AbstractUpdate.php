@@ -8,8 +8,6 @@ use SclNominetEpp\Request\Update\Field\UpdateFieldInterface;
 
 /**
  * This abstract class enables building the XML for a Nominet EPP update command.
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 abstract class AbstractUpdate extends Request
 {

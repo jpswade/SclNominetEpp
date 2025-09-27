@@ -4,6 +4,7 @@ namespace SclNominetEpp\Response\Info;
 
 use DateTime;
 use SclNominetEpp\Response\Info\Contact as ContactInfo;
+use SclNominetEpp\Response;
 use SclContact\Country;
 use SclContact\Postcode;
 use SclContact\Email;

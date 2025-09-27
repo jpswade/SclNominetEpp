@@ -2,8 +2,6 @@
 
 /**
  * Contains the nominet AbstractInfo request class definition.
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 
 namespace SclNominetEpp\Request\Info;
@@ -13,43 +11,35 @@ use SimpleXMLElement;
 
 /**
  * This class build the XML for a Nominet EPP info command.
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 abstract class AbstractInfo extends Request
 {
 
     /**
      * The namespace for the Nominet EPP info request.
-     *
-     * @var string
      */
-    protected $infoNamespace;
+    protected string $infoNamespace;
 
     /**
      * The name of the identifying value for the info request
-     * (e.g. name or id)
-     *
-     * @var string
+     * (e.g. name or id).
      */
-    protected $valueName;
+    protected string $valueName;
 
     /**
      * The domain|contact|host object.
-     *
-     * @var object
      */
-    protected $object = null;
+    protected ?object $object = null;
 
     /**
      * Constructor
      *
-     * @param string           $type
-     * @param string           $infoNamespace
-     * @param string           $valueName
-     * @param SimpleXMLElement $response
+     * @param string                $type          The type of info operation.
+     * @param string                $infoNamespace The namespace for the info operation.
+     * @param string                $valueName     The name of the value being queried.
+     * @param SimpleXMLElement|null $response      The response object.
      */
-    public function __construct($type, $infoNamespace, $valueName, $response = null)
+    public function __construct(string $type, string $infoNamespace, string $valueName, $response = null)
     {
         parent::__construct('info', $response);
         $this->type = $type;
@@ -60,9 +50,10 @@ abstract class AbstractInfo extends Request
     /**
      * {@inheritDoc}
      *
-     * @param \SimpleXMLElement $action
+     * @param SimpleXMLElement $action The XML action element.
+     * @return void
      */
-    protected function addContent(\SimpleXMLElement $action)
+    protected function addContent(SimpleXMLElement $action)
     {
         $info = $action->addChild("{$this->type}:info", '', $this->infoNamespace);
 

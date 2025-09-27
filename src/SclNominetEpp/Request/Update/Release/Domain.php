@@ -6,8 +6,6 @@ use SclNominetEpp\Response\Update\Release\Domain as ReleaseDomainResponse;
 
 /**
  * This class build the XML for a Nominet EPP r:release command.
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 class Domain extends AbstractRelease
 {

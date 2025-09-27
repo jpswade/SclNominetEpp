@@ -62,62 +62,51 @@ class Contact extends \SclContact\Contact
 
     /**
      * The Contact identifier.
-     *
-     * @var string
      */
-    private $id;
+    private string $id;
 
     /**
      * The registered company number or the DfES UK school number of the registrant.
-     *
-     * @var string
      */
-    private $companyNumber;
+    private string $companyNumber;
 
     /**
      * The name of the organisation associated with the contact.
      * @todo rename all instances of organisation to company.
-     * @var string
      */
+    private string $organisationName;
 
     /**
      * The optOut is used to prevent the registrant's address details
      * from being published in nominet's WHOIS system. (default value 'y', alternative 'n')
      * Converted to true (y),  false (n).
-     *
-     * @var boolean
      */
-    private $optOut = true;
+    private bool $optOut = true;
 
     /**
      * The date and time of contact-object creation.
-     *
-     * @var DateTime
      */
-    private $created;
+    private \DateTime $created;
 
     /**
-     * Trading name of the organisation
-     *
-     * @var string
+     * Trading name of the organisation.
      */
-    private $tradeName;
+    private string $tradeName;
 
     /**
      * The type of organisation (from the array defined in the Contact class) default "UNKNOWN".
-     *
-     * @var string
      */
-    private $companyType = self::TYPE_UNKNOWN;
+    private string $companyType = self::TYPE_UNKNOWN;
 
     /**
-     *
-     *
-     * @var string
+     * The contact type.
      */
-    private $type;
+    private string $type;
 
-    private $clientID;
+    /**
+     * The client ID.
+     */
+    private string $clientID;
 
     /**
      * Set $id

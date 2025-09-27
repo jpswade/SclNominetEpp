@@ -26,23 +26,23 @@ class Renew extends Request
 
     /**
      * The domain name.
-     *
-     * @var string
      */
-    protected $domain;
+    protected string $domain;
 
     /**
      * The expiry date.
-     *
-     * @var \DateTimeInterface
      */
-    protected $currentExpiryDate;
+    protected ?\DateTimeInterface $currentExpiryDate = null;
 
-    /** @var int The period to register for. */
-    protected $period = self::DEFAULT_PERIOD;
+    /**
+     * The period to register for.
+     */
+    protected int $period = self::DEFAULT_PERIOD;
 
-    /** @var string The unit used for the period. */
-    protected $unit = self::DEFAULT_UNIT;
+    /**
+     * The unit used for the period.
+     */
+    protected string $unit = self::DEFAULT_UNIT;
 
     /**
      * Tells the parent class what the action of this request is.

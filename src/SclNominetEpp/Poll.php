@@ -6,8 +6,6 @@ use DateTime;
 
 /**
  * This class represents the data of a poll response in an object.
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 class Poll
 {

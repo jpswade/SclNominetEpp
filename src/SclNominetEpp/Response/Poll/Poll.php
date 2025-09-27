@@ -10,8 +10,6 @@ use SimpleXMLElement;
 
 /**
  * This class interprets XML for a Nominet EPP poll command response.
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 class Poll extends Response
 {

@@ -5,6 +5,7 @@ namespace SclNominetEpp\Response\Create;
 use DateTime;
 use SclNominetEpp\Contact;
 use SclNominetEpp\Response\Create\Contact as CreateContact;
+use SclNominetEpp\Response;
 
 /**
  * contact:create response test

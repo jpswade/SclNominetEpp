@@ -6,8 +6,6 @@ use SclNominetEpp\Response\Update\Release\Contact as ReleaseContactResponse;
 
 /**
  * This class build the XML for a Nominet EPP r:release command.
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 class Contact extends AbstractRelease
 {

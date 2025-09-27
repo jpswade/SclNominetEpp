@@ -2,9 +2,6 @@
 
 /**
  * Contains the nominet CheckContact request class definition.
- *
- * @author Tom Oram <tom@scl.co.uk>
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 
 namespace SclNominetEpp\Request\Check;

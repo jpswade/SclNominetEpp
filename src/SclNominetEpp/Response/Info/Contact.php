@@ -13,8 +13,6 @@ use SclContact\PhoneNumber;
 
 /**
  * This class interprets XML for a Nominet EPP contact:info command response.
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 class Contact extends AbstractInfo
 {

@@ -26,8 +26,6 @@ class LoginTest extends TestCase
 
     public function testLogin()
     {
-        $this->request;
-
         $this->request->setCredentials('TAG', 'PASSWORD');
 
         $filename = __DIR__ . '/' . pathinfo(__FILE__, PATHINFO_FILENAME) . '.xml';

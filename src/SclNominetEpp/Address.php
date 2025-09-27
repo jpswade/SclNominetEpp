@@ -4,7 +4,6 @@ namespace SclNominetEpp;
 
 /**
  * DocBlock: Description of Address
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 class Address extends \SclContact\Address
 {

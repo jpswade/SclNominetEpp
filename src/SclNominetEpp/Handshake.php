@@ -3,22 +3,14 @@
 namespace SclNominetEpp;
 
 /**
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
- */
-
-/**
  * A handshake record
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 class Handshake
 {
     /**
      * The identifier of the handshake.
-     *
-     * @var mixed
      */
-    private $caseId;
+    private int $caseId;
 
     /**
      * The registrant of the handshake.
@@ -44,9 +36,10 @@ class Handshake
     /**
      * Set case Id.
      *
-     * @param mixed $caseId
+     * @param string|integer $caseId The case ID value.
+     * @return void
      */
-    public function setCaseId($caseId)
+    public function setCaseId($caseId): void
     {
         $this->caseId = (int)(string) $caseId;
     }
@@ -54,9 +47,9 @@ class Handshake
     /**
      * Get case Id.
      *
-     * @return mixed
+     * @return integer
      */
-    public function getCaseId()
+    public function getCaseId(): int
     {
         return $this->caseId;
     }

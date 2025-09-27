@@ -2,9 +2,6 @@
 
 /**
  * Contains the Nominet class definition.
- *
- * @author Tom Oram <tom@scl.co.uk>
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 
 namespace SclNominetEpp;
@@ -277,9 +274,9 @@ class Nominet extends AbstractRequestResponse
      * not be used to delete nameservers and accounts.
      *
      * @param Domain|string $domain
-     * @return boolean|mixed
+     * @return boolean
      */
-    public function deleteDomain(Domain $domain)
+    public function deleteDomain(Domain $domain): bool
     {
         $this->loginCheck();
 
@@ -445,10 +442,10 @@ class Nominet extends AbstractRequestResponse
      * The EPP <info> command is used to retrieve information associated with
      * an object.
      *
-     * @param  string $hostName
-     * @return Nameserver|mixed
+     * @param string $hostName The host name to query.
+     * @return Nameserver|null The nameserver object or null if not found.
      */
-    public function hostInfo($hostName)
+    public function hostInfo(string $hostName)
     {
         $this->loginCheck();
 

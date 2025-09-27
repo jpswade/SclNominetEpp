@@ -5,6 +5,7 @@ namespace SclNominetEpp\Response\Create;
 use DateTime;
 use SclNominetEpp\Domain;
 use SclNominetEpp\Response\Create\Domain as CreateDomain;
+use SclNominetEpp\Response;
 
 /**
  * domain:create response test

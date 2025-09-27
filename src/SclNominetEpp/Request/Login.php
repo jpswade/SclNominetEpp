@@ -2,8 +2,6 @@
 
 /**
  * Contains the nominet Login request class definition.
- *
- * @author Tom Oram <tom@scl.co.uk>
  */
 
 namespace SclNominetEpp\Request;
@@ -14,31 +12,23 @@ use SimpleXMLElement;
 
 /**
  * This class build the XML for a Nominet EPP login command.
- *
- * @author Tom Oram <tom@scl.co.uk>
  */
 class Login extends Request
 {
     /**
      * The registrar tag.
-     *
-     * @var string
      */
-    protected $tag;
+    protected string $tag;
 
     /**
      * The password to login with.
-     *
-     * @var string
      */
-    protected $password;
+    protected string $password;
 
     /**
      * The new password if the password is to be changed.
-     *
-     * @var string
      */
-    protected $newPassword = null;
+    protected ?string $newPassword = null;
 
     /**
      * Tells the parent class what the action of this request is.
@@ -51,11 +41,11 @@ class Login extends Request
     /**
      * Sets the login details for this.
      *
-     * @param  string $tag
-     * @param  string $password
-     * @return Login
+     * @param string $tag      The registrar tag.
+     * @param string $password The password.
+     * @return static
      */
-    public function setCredentials($tag, $password)
+    public function setCredentials(string $tag, string $password)
     {
         $this->tag = $tag;
         $this->password = $password;
@@ -66,9 +56,10 @@ class Login extends Request
     /**
      * Sets a new password for this account.
      *
-     * @param string $newPassword
+     * @param string $newPassword The new password.
+     * @return static
      */
-    public function changePassword($newPassword)
+    public function changePassword(string $newPassword)
     {
         $this->newPassword = $newPassword;
 
@@ -76,19 +67,25 @@ class Login extends Request
     }
 
     /**
-     * @param SimpleXMLElement $xml
-     * @param string           $uri
+     * Add object URI to XML.
+     *
+     * @param SimpleXMLElement $xml The XML element.
+     * @param string           $uri The URI to add.
+     * @return void
      */
-    private function addObjUri(SimpleXMLElement $xml, $uri)
+    private function addObjUri(SimpleXMLElement $xml, string $uri): void
     {
         $xml->addChild('objURI', $uri);
     }
 
     /**
-     * @param SimpleXMLElement $xml
-     * @param string           $uri
+     * Add service extension to XML.
+     *
+     * @param SimpleXMLElement $xml The XML element.
+     * @param string           $uri The URI to add.
+     * @return void
      */
-    private function addSvcExtension(SimpleXMLElement $xml, $uri)
+    private function addSvcExtension(SimpleXMLElement $xml, string $uri): void
     {
         $xml->addChild(
             'extURI',
@@ -99,9 +96,10 @@ class Login extends Request
     /**
      * {@inheritDoc}
      *
-     * @param SimpleXMLElement $action
+     * @param SimpleXMLElement $action The XML action element.
+     * @return void
      */
-    protected function addContent(SimpleXMLElement $action)
+    protected function addContent(SimpleXMLElement $action): void
     {
         $action->addChild('clID', $this->tag);
         $action->addChild('pw', $this->password);

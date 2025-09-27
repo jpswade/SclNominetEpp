@@ -7,8 +7,6 @@ use SclNominetEpp\Response\Info\Host as HostInfoResponse;
 
 /**
  * This class build the XML for a Nominet EPP host:info command.
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 class Host extends AbstractInfo
 {

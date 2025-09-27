@@ -2,8 +2,6 @@
 
 /**
  * Contains the nominet List request class definition.
- *
- * @author Tom Oram <tom@scl.co.uk>
  */
 
 namespace SclNominetEpp\Request;

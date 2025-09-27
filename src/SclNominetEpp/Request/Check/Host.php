@@ -2,9 +2,6 @@
 
 /**
  * Contains the nominet CheckHost request class definition.
- *
- * @author Tom Oram <tom@scl.co.uk>
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 
 namespace SclNominetEpp\Request\Check;
@@ -13,9 +10,6 @@ use SclNominetEpp\Response\Check\Host as CheckHostResponse;
 
 /**
  * This class build the XML for a Nominet EPP host:check command.
- *
- * @author Tom Oram <tom@scl.co.uk>
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 class Host extends AbstractCheck
 {

@@ -4,8 +4,6 @@ namespace SclNominetEpp;
 
 /**
  * This class is the fork object for the fork command response data
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 class Fork
 {

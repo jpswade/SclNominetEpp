@@ -2,8 +2,6 @@
 
 /**
  * Contains the nominet AbstractCheck response class definition.
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 
 namespace SclNominetEpp\Response\Check;
@@ -13,8 +11,6 @@ use SimpleXMLElement;
 
 /**
  * This class interprets XML for a Nominet EPP check command response.
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 abstract class AbstractCheck extends Response
 {

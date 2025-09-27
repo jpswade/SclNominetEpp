@@ -2,8 +2,6 @@
 
 /**
  * Contains the nominet Login request class definition.
- *
- * @author Tom Oram <tom@scl.co.uk>
  */
 
 namespace SclNominetEpp\Request;
@@ -14,8 +12,6 @@ use SclNominetEpp\Request;
 
 /**
  * This class build the XML for a Nominet EPP hello command.
- *
- * @author Tom Oram <tom@scl.co.uk>
  */
 class Hello extends Request
 {
@@ -23,7 +19,7 @@ class Hello extends Request
      * Hello doesn't use the "<command>" tag
      * so "getPacket()" needs to be overwritten to avoid redundant validation
      *
-     * @return type
+     * @return string|null
      */
     public function getPacket(): ?string
     {

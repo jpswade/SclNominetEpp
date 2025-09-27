@@ -9,8 +9,6 @@ use SclNominetEpp\Response\Update\Contact as UpdateContactResponse;
 
 /**
  * This class build the XML for a Nominet EPP contact:update command.
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 class Contact extends Request
 {

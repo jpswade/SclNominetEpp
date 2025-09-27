@@ -10,8 +10,6 @@ use Exception;
 
 /**
  * This class build the XML for a Nominet EPP domain:create command.
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 class Domain extends AbstractCreate
 {

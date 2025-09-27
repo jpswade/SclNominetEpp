@@ -2,8 +2,6 @@
 
 /**
  * Contains the Communicator class definition.
- *
- * @author Tom Oram <tom@scl.co.uk>
  */
 
 namespace SclNominetEpp;
@@ -14,8 +12,6 @@ use SclRequestResponse\Communicator\PersistentCommunicator;
 /**
  * Sets up communication with the Nominet EPP server and sends requests and
  * processes the responses.
- *
- * @author Tom Oram
  */
 class Communicator extends PersistentCommunicator
 {

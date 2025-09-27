@@ -2,9 +2,6 @@
 
 /**
  * Contains the nominet CheckDomain request class definition.
- *
- * @author Tom Oram <tom@scl.co.uk>
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 
 namespace SclNominetEpp\Request\Check;
@@ -13,9 +10,6 @@ use SclNominetEpp\Response\Check\Domain as CheckDomainResponse;
 
 /**
  * This class build the XML for a Nominet EPP domain:check command.
- *
- * @author Tom Oram <tom@scl.co.uk>
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 class Domain extends AbstractCheck
 {

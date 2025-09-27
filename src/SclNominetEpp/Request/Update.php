@@ -9,19 +9,19 @@ use SclNominetEpp\Request\Update\Helper\DomainCompareHelper;
 class Update
 {
     /**
-     * @var Domain
+     * The domain being updated.
      */
-    private $domain;
+    private Domain $domain;
 
     /**
-     * @var Domain
+     * The current state of the domain.
      */
-    private $currentDomain;
+    private Domain $currentDomain;
 
     /**
-     * @var Update\Domain
+     * The update request object.
      */
-    private $request;
+    private Update\Domain $request;
 
     public function __invoke(Domain $domain, Domain $currentDomain): Update\Domain
     {
@@ -121,7 +121,7 @@ class Update
 
     protected function getIntersect(array $current, array $new): array
     {
-        return array_uintersect(
+        return array_udiff(
             $current,
             $new,
             [DomainCompareHelper::class, 'compare']

@@ -18,34 +18,29 @@ abstract class AbstractCheck extends Request
 
     /**
      * The namespace for the Nominet EPP check request.
-     *
-     * @var string
      */
-    private $checkNamespace;
+    private string $checkNamespace;
 
     /**
      * The name of the identifying value for the check request
-     * (e.g. name or id)
-     *
-     * @var string
+     * (e.g. name or id).
      */
-    private $valueName;
+    private string $valueName;
 
     /**
-     *
-     * @var array
+     * Array of values to check.
      */
-    private $values = [];
+    private array $values = [];
 
     /**
      * Constructor.
      *
-     * @param string   $type
-     * @param string   $checkNamespace
-     * @param string   $valueName
-     * @param Response $response
+     * @param string        $type           The type of check operation.
+     * @param string        $checkNamespace The namespace for the check operation.
+     * @param string        $valueName      The name of the value being checked.
+     * @param Response|null $response       The response object.
      */
-    public function __construct($type, $checkNamespace, $valueName, Response $response = null)
+    public function __construct(string $type, string $checkNamespace, string $valueName, Response $response = null)
     {
         parent::__construct('check', $response);
 
@@ -57,7 +52,8 @@ abstract class AbstractCheck extends Request
     /**
      * The values to lookup.
      *
-     * @param  array|string $values
+     * @param array|string $values The values to check.
+     * @return static
      */
     public function lookup($values): AbstractCheck
     {
@@ -70,7 +66,13 @@ abstract class AbstractCheck extends Request
         return $this;
     }
 
-    protected function addContent(SimpleXMLElement $action)
+    /**
+     * Add content to the XML request.
+     *
+     * @param SimpleXMLElement $action The XML action element.
+     * @return void
+     */
+    protected function addContent(SimpleXMLElement $action): void
     {
         $check = $action->addChild("{$this->type}:check", '', $this->checkNamespace);
 

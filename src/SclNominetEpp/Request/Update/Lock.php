@@ -13,52 +13,40 @@ class Lock extends Request
     const TYPE_OPTOUT        = 'opt-out';
 
     /**
-     * all accepted objects of Lock command.
-     *
-     * @var array
+     * All accepted objects of Lock command.
      */
-    private static $objects = [
+    private static array $objects = [
         self::OBJECT_CONTACT,
         self::OBJECT_DOMAIN
     ];
 
     /**
      * All acceptable types of Lock command.
-     *
-     * @var array
      */
-    private static $types = [
+    private static array $types = [
         self::TYPE_INVESTIGATION,
         self::TYPE_OPTOUT
     ];
 
     /**
      * Contact Id.
-     *
-     * @var string
      */
-    protected $contactId;
+    protected string $contactId;
 
     /**
      * Domain Name.
-     *
-     * @var string
      */
-    protected $domainName;
+    protected string $domainName;
 
     /**
-     * Either a "contact" or a "domain"
-     *
-     * @var string
+     * Either a "contact" or a "domain".
      */
-    protected $object;
+    protected string $object;
 
     /**
-     * Either "investigation" or "opt-out"
-     *
-     * @var string
+     * Either "investigation" or "opt-out".
      */
-    protected $type;
+    protected string $type;
 
     /**
      * Initialises the object string, and type string.

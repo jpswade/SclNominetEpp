@@ -3,6 +3,7 @@
 namespace SclNominetEpp\Response\Check;
 
 use SclNominetEpp\Response\Check\Domain as CheckDomain;
+use SclNominetEpp\Response;
 
 /**
  * domain:check response test

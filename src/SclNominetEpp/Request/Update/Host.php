@@ -8,8 +8,6 @@ use SclNominetEpp\Request\Update\Field\UpdateFieldInterface;
 
 /**
  * This class build the XML for a Nominet EPP contact:update command.
- *
- * @author Merlyn Cooper <merlyn.cooper@hotmail.co.uk>
  */
 class Host extends Request
 {

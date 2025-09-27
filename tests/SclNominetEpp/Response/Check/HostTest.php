@@ -3,6 +3,7 @@
 namespace SclNominetEpp\Response\Check;
 
 use SclNominetEpp\Response\Check\Host as CheckHost;
+use SclNominetEpp\Response;
 
 /**
  * host:check response test
