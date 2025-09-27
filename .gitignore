@@ -1,4 +1,5 @@
-.idea
+/.idea
+/.history
 composer.phar
 composer.lock
 vendor
@@ -10,3 +11,4 @@ php-cs-fixer.phar
 .project
 .settings
 build
+/.phpunit.result.cache
