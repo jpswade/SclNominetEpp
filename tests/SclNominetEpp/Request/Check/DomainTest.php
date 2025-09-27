@@ -1,4 +1,5 @@
 <?php
+
 namespace SclNominetEpp\Request\Check;
 
 use SclNominetEpp\Request;
@@ -40,7 +41,7 @@ class DomainTest extends \PHPUnit\Framework\TestCase
 EOX;
 
         $domain = 'caliban-scl.sch.uk';
-        $domains = array($domain);
+        $domains = [$domain];
         $this->request->lookup($domains);
 
         $this->assertEquals($xml, $this->request->getPacket());

@@ -1,4 +1,5 @@
 <?php
+
 namespace SclNominetEpp;
 
 /**
@@ -38,7 +39,7 @@ class Handshake
      *
      * @var array
      */
-    private $domainList = array();
+    private $domainList = [];
 
     /**
      * Set case Id.
@@ -63,7 +64,7 @@ class Handshake
     /**
      * Get the number of domains within the handshake.
      *
-     * @return int
+     * @return integer
      */
     public function getNumberOfDomains()
     {
@@ -73,7 +74,7 @@ class Handshake
     /**
      * Set the number of domains within the handshake.
      *
-     * @param int $numberOfDomains
+     * @param integer $numberOfDomains
      */
     public function setNumberOfDomains($numberOfDomains)
     {

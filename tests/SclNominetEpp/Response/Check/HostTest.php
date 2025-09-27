@@ -1,4 +1,5 @@
 <?php
+
 namespace SclNominetEpp\Response\Check;
 
 use SclNominetEpp\Response\Check\Host as CheckHost;
@@ -59,17 +60,16 @@ class HostTest extends \PHPUnit\Framework\TestCase
 </epp>
 EOX;
 
-        $expected = array(
+        $expected = [
             'ns1.example.com'  => true,
             'ns2.example2.com' => false,
             'ns3.example3.com' => true
-        );
+        ];
 
         $this->response->init($xml);
 
         $hosts = $this->response->getValues();
 
         $this->assertEquals($expected, $hosts);
-
     }
 }

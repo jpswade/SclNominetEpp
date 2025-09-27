@@ -348,7 +348,7 @@ class Domain
     }
 
     /**
-     * @param int|object $autoBill
+     * @param integer|object $autoBill
      * @return void
      */
     public function setAutoBill($autoBill)
@@ -362,7 +362,7 @@ class Domain
     }
 
     /**
-     * @param int|object $nextBill
+     * @param integer|object $nextBill
      * @return void
      */
     public function setNextBill($nextBill)

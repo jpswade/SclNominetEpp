@@ -33,14 +33,14 @@ class Greeting
      *
      * {@link http://tools.ietf.org/html/rfc5730#section-2.4 <access> children documentation}
      */
-    protected static array $accessTags = array(
+    protected static array $accessTags = [
         self::ACCESS_ALL,
         self::ACCESS_NONE,
         self::ACCESS_NULL,
         self::ACCESS_PERSONAL,
         self::ACCESS_PERSONAL_AND_OTHER,
         self::ACCESS_OTHER
-    );
+    ];
     /**
      * {@link http://tools.ietf.org/html/rfc5730#section-2.4 <purpose> children documentation}
      */

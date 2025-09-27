@@ -5,7 +5,6 @@ namespace SclNominetEpp\Response\Info;
 use SimpleXMLElement;
 use SclNominetEpp\Contact as ContactObject;
 use SclNominetEpp\Address;
-
 use SclContact\Country;
 use SclContact\Postcode;
 use SclContact\Email;

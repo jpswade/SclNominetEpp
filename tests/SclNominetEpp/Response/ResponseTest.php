@@ -1,4 +1,5 @@
 <?php
+
 namespace SclNominetEpp\Response;
 
 use PHPUnit\Framework\TestCase;

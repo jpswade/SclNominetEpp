@@ -47,7 +47,7 @@ class Poll
     }
 
     /**
-     * @param int $count
+     * @param integer $count
      */
     public function setCount(int $count): void
     {

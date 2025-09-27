@@ -1,4 +1,5 @@
 <?php
+
 namespace SclNominetEpp\Response\Check;
 
 use SclNominetEpp\Response\Check\Domain as CheckDomain;
@@ -63,16 +64,15 @@ class DomainTest extends \PHPUnit\Framework\TestCase
 </epp>
 EOX;
 
-        $expected = array(
+        $expected = [
             'domain1.co.uk' => false,
             'domain2.co.uk' => true,
-        );
+        ];
 
         $this->response->init($xml);
 
         $domains = $this->response->getValues();
 
         $this->assertEquals($expected, $domains);
-
     }
 }

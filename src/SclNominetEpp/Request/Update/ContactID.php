@@ -21,8 +21,8 @@ class ContactID extends Request
     protected $newContactID = null;
     protected $value;
 
-    private $add = array();
-    private $remove = array();
+    private $add = [];
+    private $remove = [];
 
     public function __construct($value)
     {

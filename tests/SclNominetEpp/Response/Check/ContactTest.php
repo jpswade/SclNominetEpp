@@ -1,4 +1,5 @@
 <?php
+
 namespace SclNominetEpp\Response\Check;
 
 use SclNominetEpp\Response\Check\Contact as CheckContact;
@@ -59,17 +60,16 @@ class ContactTest extends \PHPUnit\Framework\TestCase
 </epp>
 EOX;
 
-        $expected = array(
+        $expected = [
             'sc2343' => true,
             'sah8013' => false,
             '8013sah' => true
-        );
+        ];
 
         $this->response->init($xml);
 
         $contacts = $this->response->getValues();
 
         $this->assertEquals($expected, $contacts);
-
     }
 }

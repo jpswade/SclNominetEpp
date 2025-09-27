@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<ruleset name="SclNominetEpp">
+    <description>Coding standard for SclNominetEpp library</description>
+
+    <!-- Include the entire src directory -->
+    <file>src</file>
+    
+    <!-- Include the entire tests directory -->
+    <file>tests</file>
+
+    <!-- Exclude vendor directory -->
+    <exclude-pattern>vendor</exclude-pattern>
+    
+    <!-- Exclude cache files -->
+    <exclude-pattern>*.cache</exclude-pattern>
+    <exclude-pattern>.phpunit.result.cache</exclude-pattern>
+
+    <!-- Use PSR-12 as the base standard -->
+    <rule ref="PSR12"/>
+    
+    <!-- Additional rules for better code quality -->
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="120"/>
+            <property name="absoluteLineLimit" value="150"/>
+        </properties>
+    </rule>
+    
+    <!-- Enforce consistent naming -->
+    <rule ref="PSR1.Classes.ClassDeclaration"/>
+    <rule ref="PSR1.Methods.CamelCapsMethodName"/>
+    
+    <!-- Documentation rules -->
+    <rule ref="Squiz.Commenting.FunctionComment">
+        <severity>5</severity>
+    </rule>
+    
+    <!-- Security rules -->
+    <rule ref="Generic.PHP.DeprecatedFunctions"/>
+    <rule ref="Generic.PHP.ForbiddenFunctions"/>
+    
+    <!-- Code quality rules -->
+    <rule ref="Generic.CodeAnalysis.EmptyStatement"/>
+    <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"/>
+    <rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier"/>
+    
+    <!-- Disable some overly strict rules -->
+    <rule ref="PSR12.Classes.ClassInstantiation">
+        <severity>0</severity>
+    </rule>
+    
+    <!-- Allow short array syntax -->
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    
+    <!-- Show progress -->
+    <arg name="colors"/>
+    
+    <!-- Generate reports -->
+    <arg value="sp"/>
+    <arg value="np"/>
+</ruleset>

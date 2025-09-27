@@ -1,4 +1,5 @@
 <?php
+
 namespace SclNominetEpp\Request\Check;
 
 use SclNominetEpp\Request;
@@ -41,7 +42,7 @@ class ContactTest extends \PHPUnit\Framework\TestCase
 
 EOX;
 
-        $contacts = array('sc2343','sah8013', '8013sah');
+        $contacts = ['sc2343','sah8013', '8013sah'];
         $this->request->lookup($contacts);
 
         $this->assertEquals($xml, $this->request->getPacket());

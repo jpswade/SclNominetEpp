@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Contains the Communicator class definition.
  *
@@ -23,28 +24,28 @@ class Communicator extends PersistentCommunicator
      *
      * @var array
      */
-    public static $config = array(
-        'live' => array(
-            'secure' => array(
+    public static $config = [
+        'live' => [
+            'secure' => [
                 'host' => 'epp.nominet.org.uk',
                 'port' => '700',
-            ),
-            'insecure' => array(
+            ],
+            'insecure' => [
                 'host' => 'epp.nominet.org.uk',
                 'port' => '8700',
-            ),
-        ),
-        'test' => array(
-            'secure' => array(
+            ],
+        ],
+        'test' => [
+            'secure' => [
                 'host' => 'testbed-epp.nominet.org.uk',
                 'port' => '700',
-            ),
-            'insecure' => array(
+            ],
+            'insecure' => [
                 'host' => 'testbed-epp.nominet.org.uk',
                 'port' => '8700',
-            ),
-        ),
-    );
+            ],
+        ],
+    ];
 
     /**
      * Constructor

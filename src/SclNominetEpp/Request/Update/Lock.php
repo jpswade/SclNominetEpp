@@ -17,10 +17,10 @@ class Lock extends Request
      *
      * @var array
      */
-    private static $objects = array(
+    private static $objects = [
         self::OBJECT_CONTACT,
         self::OBJECT_DOMAIN
-    );
+    ];
 
     /**
      * All acceptable types of Lock command.

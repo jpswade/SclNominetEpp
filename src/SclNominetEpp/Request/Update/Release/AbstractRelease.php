@@ -17,7 +17,7 @@ abstract class AbstractRelease extends Request
      *
      * @var string
      */
-    protected $value='';
+    protected $value = '';
 
     /**
      * The type of check this is.
@@ -52,9 +52,9 @@ abstract class AbstractRelease extends Request
     /**
      * Constructor
      *
-     * @param string $type
-     * @param string $updateNamespace
-     * @param string $valueName
+     * @param string           $type
+     * @param string           $updateNamespace
+     * @param string           $valueName
      * @param SimpleXMLElement $response
      */
     public function __construct($type, $updateNamespace, $valueName, $response = null)

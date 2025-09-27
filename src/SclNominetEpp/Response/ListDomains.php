@@ -15,7 +15,7 @@ class ListDomains extends Response
     const LIST_MONTH  = 1;
     const LIST_EXPIRY = 2;
 
-    protected $domains = array();
+    protected $domains = [];
 
     /**
      * {@inheritDoc}

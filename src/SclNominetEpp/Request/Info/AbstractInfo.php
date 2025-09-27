@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Contains the nominet AbstractInfo request class definition.
  *
@@ -43,9 +44,9 @@ abstract class AbstractInfo extends Request
     /**
      * Constructor
      *
-     * @param string $type
-     * @param string $infoNamespace
-     * @param string $valueName
+     * @param string           $type
+     * @param string           $infoNamespace
+     * @param string           $valueName
      * @param SimpleXMLElement $response
      */
     public function __construct($type, $infoNamespace, $valueName, $response = null)

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Contains the LoginRequire exception class definition.
  *

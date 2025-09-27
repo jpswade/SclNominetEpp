@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Contains the Nominet class definition.
  *
@@ -93,9 +94,9 @@ class Nominet extends AbstractRequestResponse
      * other EPP command and identifies and authenticates the tag to be used
      * by the session. An EPP session is terminated by a logout command.
      *
-     * @param  string  $tag
-     * @param  string  $password
-     * @param  string  $newPassword If specified with change the password.
+     * @param  string $tag
+     * @param  string $password
+     * @param  string $newPassword If specified with change the password.
      * @return boolean True if the login was successful.
      */
     public function login($tag, $password, $newPassword = null)
@@ -295,7 +296,7 @@ class Nominet extends AbstractRequestResponse
      * The <renew> command only applies to domain names. It has no meaning for
      * other object types.
      *
-     * @param string $domain The domain to be renewed
+     * @param string        $domain  The domain to be renewed
      * @param DateTime|NULL $expDate The new expiry data or NULL
      */
     public function renew($domain, $expDate)
@@ -544,15 +545,15 @@ class Nominet extends AbstractRequestResponse
      * Retrieves a domain list.
      * NOTE: This method is called domainList as list is a resevered word :-(
      *
-     * @param  integer    $year
-     * @param  integer    $month
-     * @param  integer|null    $type
+     * @param  integer      $year
+     * @param  integer      $month
+     * @param  integer|null $type
      */
     public function listDomains($year, $month, $type = ListDomains::LIST_MONTH)
     {
         $this->loginCheck();
 
-        if (!in_array($type, array(ListDomains::LIST_MONTH, ListDomains::LIST_EXPIRY))) {
+        if (!in_array($type, [ListDomains::LIST_MONTH, ListDomains::LIST_EXPIRY])) {
             throw new Exception("Invalid type $type.");
         }
 

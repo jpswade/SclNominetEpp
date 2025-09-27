@@ -1,4 +1,5 @@
 <?php
+
 namespace SclNominetEpp;
 
 use DateTime;
@@ -39,7 +40,7 @@ class Contact extends \SclContact\Contact
      *
      * @var array
      */
-    private static $companyTypes = array(
+    private static $companyTypes = [
         self::TYPE_UK_LTD,
         self::TYPE_UK_PLC,
         self::TYPE_UK_PARTNERSHIP,
@@ -57,7 +58,7 @@ class Contact extends \SclContact\Contact
         self::TYPE_NON_UK_CORP,
         self::TYPE_NON_UK_OTHER,
         self::TYPE_UNKNOWN
-    );
+    ];
 
     /**
      * The Contact identifier.

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Contains the nominet CheckHost request class definition.
  *

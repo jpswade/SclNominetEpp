@@ -83,28 +83,38 @@ class Update
 
     protected function extension(): void
     {
-        if ($this->domain->getRegistrant() !== null &&
-            $this->domain->getRegistrant() != $this->currentDomain->getRegistrant()) {
+        if (
+            $this->domain->getRegistrant() !== null &&
+            $this->domain->getRegistrant() != $this->currentDomain->getRegistrant()
+        ) {
             $this->request->changeRegistrant($this->domain->getRegistrant());
         }
 
-        if ($this->domain->hasPassword() &&
-            $this->domain->getPassword() != $this->currentDomain->getPassword()) {
+        if (
+            $this->domain->hasPassword() &&
+            $this->domain->getPassword() != $this->currentDomain->getPassword()
+        ) {
             $this->request->changePassword($this->domain->getPassword());
         }
 
-        if ($this->domain->hasAutoBill() &&
-            $this->domain->getAutoBill() != $this->currentDomain->getAutoBill()) {
+        if (
+            $this->domain->hasAutoBill() &&
+            $this->domain->getAutoBill() != $this->currentDomain->getAutoBill()
+        ) {
             $this->request->setAutoBill($this->domain->getAutoBill());
         }
 
-        if ($this->domain->hasNextBill() &&
-            $this->domain->getNextBill() != $this->currentDomain->getNextBill()) {
+        if (
+            $this->domain->hasNextBill() &&
+            $this->domain->getNextBill() != $this->currentDomain->getNextBill()
+        ) {
             $this->request->setNextBill($this->domain->getNextBill());
         }
 
-        if ($this->domain->hasNotes() &&
-            $this->domain->getNotes() != $this->currentDomain->getNotes()) {
+        if (
+            $this->domain->hasNotes() &&
+            $this->domain->getNotes() != $this->currentDomain->getNotes()
+        ) {
             $this->request->setNotes($this->domain->getNotes());
         }
     }

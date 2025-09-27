@@ -1,4 +1,5 @@
 <?php
+
 namespace SclNominetEpp\Request\Update;
 
 use SclNominetEpp\Request;

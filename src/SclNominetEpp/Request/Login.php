@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Contains the nominet Login request class definition.
  *
@@ -76,7 +77,7 @@ class Login extends Request
 
     /**
      * @param SimpleXMLElement $xml
-     * @param string $uri
+     * @param string           $uri
      */
     private function addObjUri(SimpleXMLElement $xml, $uri)
     {
@@ -85,7 +86,7 @@ class Login extends Request
 
     /**
      * @param SimpleXMLElement $xml
-     * @param string $uri
+     * @param string           $uri
      */
     private function addSvcExtension(SimpleXMLElement $xml, $uri)
     {

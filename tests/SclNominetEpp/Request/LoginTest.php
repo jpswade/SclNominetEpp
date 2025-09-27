@@ -1,4 +1,5 @@
 <?php
+
 namespace SclNominetEpp\Request;
 
 use PHPUnit\Framework\TestCase;
@@ -32,6 +33,5 @@ class LoginTest extends TestCase
         $filename = __DIR__ . '/' . pathinfo(__FILE__, PATHINFO_FILENAME) . '.xml';
         $xml = file_get_contents($filename);
         $this->assertEquals($xml, $this->request->getPacket());
-
     }
 }

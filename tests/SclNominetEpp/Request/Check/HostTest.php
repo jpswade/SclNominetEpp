@@ -1,4 +1,5 @@
 <?php
+
 namespace SclNominetEpp\Request\Check;
 
 use SclNominetEpp\Request;
@@ -41,7 +42,7 @@ class HostTest extends \PHPUnit\Framework\TestCase
 
 EOX;
 
-        $hosts = array('ns1.example.com','ns2.example.com', 'ns3.example.com');
+        $hosts = ['ns1.example.com','ns2.example.com', 'ns3.example.com'];
         $this->request->lookup($hosts);
 
         $this->assertEquals($xml, $this->request->getPacket());

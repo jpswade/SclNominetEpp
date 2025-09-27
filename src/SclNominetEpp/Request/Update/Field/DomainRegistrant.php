@@ -1,4 +1,5 @@
 <?php
+
 namespace SclNominetEpp\Request\Update\Field;
 
 use SclNominetEpp\Contact;

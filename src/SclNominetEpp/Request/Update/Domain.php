@@ -134,9 +134,11 @@ class Domain extends Request
             $domainRegistrant->fieldXml($change);
         }
 
-        if ($this->autoBill !== null ||
+        if (
+            $this->autoBill !== null ||
             $this->nextBill !== null ||
-            $this->notes !== []) {
+            $this->notes !== []
+        ) {
             $extensionXML = $this->xml->command->addChild('extension');
             $extension = $extensionXML->addChild('domain-ext:update', '', $extensionNS);
             $extension->addAttribute(
@@ -193,7 +195,7 @@ class Domain extends Request
     }
 
     /**
-     * @param ?string[] $notes
+     * @param string[] $notes
      */
     public function setNotes(?array $notes)
     {

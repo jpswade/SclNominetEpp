@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Contains the nominet CheckContact request class definition.
  *

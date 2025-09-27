@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Contains the Nominet Renew request class definition.
  */
@@ -58,7 +59,7 @@ class Renew extends Request
     /**
      * Set the domain
      *
-     * @param string $domain
+     * @param string                  $domain
      * @param \DateTimeInterface|null $currentExpiryDate
      * @return \SclNominetEpp\Request\Renew
      */
@@ -88,7 +89,7 @@ class Renew extends Request
     /**
      * Set the period
      *
-     * @param int $period
+     * @param integer $period
      * @return \SclNominetEpp\Request\Renew
      */
     public function setPeriod(int $period)

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Contains the nominet AbstractCheck response class definition.
  *
@@ -36,7 +37,7 @@ abstract class AbstractCheck extends Response
      *
      * @var array
      */
-    private $values = array();
+    private $values = [];
 
     /**
      * Constructor
@@ -71,7 +72,7 @@ abstract class AbstractCheck extends Response
 
         $valueName = $this->valueName;
         foreach ($xmlValues->chkData->cd as $value) {
-            $available = (boolean) (string) $value->$valueName->attributes()->avail;
+            $available = (bool) (string) $value->$valueName->attributes()->avail;
             $this->values[(string) $value->$valueName] = $available;
         }
     }

@@ -35,14 +35,14 @@ abstract class AbstractCheck extends Request
      *
      * @var array
      */
-    private $values = array();
+    private $values = [];
 
     /**
      * Constructor.
      *
-     * @param string $type
-     * @param string $checkNamespace
-     * @param string $valueName
+     * @param string   $type
+     * @param string   $checkNamespace
+     * @param string   $valueName
      * @param Response $response
      */
     public function __construct($type, $checkNamespace, $valueName, Response $response = null)
@@ -64,7 +64,7 @@ abstract class AbstractCheck extends Request
         if (is_array($values)) {
             $this->values = $values;
         } else {
-            $this->values = array($values);
+            $this->values = [$values];
         }
 
         return $this;
