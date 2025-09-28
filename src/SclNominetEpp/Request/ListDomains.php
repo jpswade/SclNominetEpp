@@ -15,7 +15,6 @@ use SimpleXMLElement;
  */
 class ListDomains extends Request
 {
-
     /**
      * The month of the list element (also contains the year).
      */

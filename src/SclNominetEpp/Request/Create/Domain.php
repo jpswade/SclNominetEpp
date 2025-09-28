@@ -13,7 +13,6 @@ use Exception;
  */
 class Domain extends AbstractCreate
 {
-
     const TYPE = 'domain';
     const CREATE_NAMESPACE = 'urn:ietf:params:xml:ns:domain-1.0';
     const DUMMY_PASSWORD = 'qwerty';
@@ -35,7 +34,8 @@ class Domain extends AbstractCreate
     /**
      * includes Create Object specific content for addContent in AbstractCreate
      *
-     * @param SimpleXMLElement $create
+     * @param SimpleXMLElement $create The XML element to add content to.
+     * @return void
      */
     protected function addSpecificContent(SimpleXMLElement $create)
     {
@@ -57,7 +57,8 @@ class Domain extends AbstractCreate
     /**
      * Creates XML for all the nameservers
      *
-     * @param SimpleXMLElement $ns
+     * @param SimpleXMLElement $ns The XML element for nameservers.
+     * @return void
      */
     protected function createNameservers(SimpleXMLElement $ns)
     {
@@ -69,7 +70,8 @@ class Domain extends AbstractCreate
     /**
      * Creates XML for all the contacts
      *
-     * @param SimpleXMLElement $create
+     * @param SimpleXMLElement $create The XML element to add contacts to.
+     * @return void
      */
     protected function createContacts(SimpleXMLElement $create)
     {
@@ -81,7 +83,9 @@ class Domain extends AbstractCreate
 
     /**
      * An Exception is thrown if the object is not of type \SclNominetEpp\Domain
-     * @throws InvalidArgumentException
+     * @param mixed $object The object to validate.
+     * @return boolean True if validation passes.
+     * @throws InvalidArgumentException When object is not a valid domain.
      */
     public function objectValidate($object): bool
     {
@@ -95,13 +99,19 @@ class Domain extends AbstractCreate
     /**
      * Set Domain.
      *
-     * @param \SclNominetEpp\Domain $object
+     * @param DomainObject $object The domain object to set.
+     * @return void
      */
     public function setDomain(DomainObject $object)
     {
         $this->object = $object;
     }
 
+    /**
+     * Get the name of the domain.
+     *
+     * @return string The domain name.
+     */
     protected function getName()
     {
         return $this->object->getName();

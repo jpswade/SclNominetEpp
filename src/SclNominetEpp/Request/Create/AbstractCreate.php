@@ -36,6 +36,15 @@ abstract class AbstractCreate extends Request
      */
     protected $object = null;
 
+    /**
+     * Constructor for AbstractCreate.
+     *
+     * @param string        $type            The type of object to create.
+     * @param string        $createNamespace The namespace for the create command.
+     * @param string        $valueName       The name of the identifier.
+     * @param Response|null $response        The response object.
+     * @return void
+     */
     public function __construct(string $type, string $createNamespace, string $valueName, Response $response = null)
     {
         parent::__construct('create', $response);
@@ -45,6 +54,12 @@ abstract class AbstractCreate extends Request
         $this->valueName = $valueName;
     }
 
+    /**
+     * Add content to the XML action element.
+     *
+     * @param SimpleXMLElement $action The XML action element.
+     * @return void
+     */
     protected function addContent(SimpleXMLElement $action)
     {
         $this->objectValidate($this->object);
@@ -57,11 +72,18 @@ abstract class AbstractCreate extends Request
         $this->addSpecificContent($create);
     }
 
+    /**
+     * Get the name of the object.
+     *
+     * @return string The name of the object.
+     */
     abstract protected function getName();
 
     /**
      * Validates whether the object is of the correct class.
-     * @throws InvalidArgumentException
+     * @param DomainObject|ContactObject|Nameserver|null $object The object to validate.
+     * @return boolean True if validation passes.
+     * @throws InvalidArgumentException When object is not valid.
      */
     abstract protected function objectValidate($object): bool;
 
@@ -69,6 +91,12 @@ abstract class AbstractCreate extends Request
      * This allows subclasses to add their own specific content
      * to the addContent function that all subclasses may run
      * because it is defined in this abstract class.
+     */
+    /**
+     * Add specific content to the create element.
+     *
+     * @param SimpleXMLElement $create The XML create element.
+     * @return void
      */
     abstract protected function addSpecificContent(SimpleXMLElement $create);
 }

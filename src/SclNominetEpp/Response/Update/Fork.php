@@ -25,6 +25,12 @@ class Fork extends Response
      */
     protected $createDate;
 
+    /**
+     * Process the XML data for fork response.
+     *
+     * @param SimpleXMLElement $xml The XML element to process.
+     * @return void
+     */
     protected function processData(SimpleXMLElement $xml)
     {
         if (!$this->success()) {

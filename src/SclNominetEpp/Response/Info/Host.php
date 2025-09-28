@@ -13,6 +13,11 @@ class Host extends AbstractInfo
     const TYPE = 'host';
     const VALUE_NAME = 'name';
 
+    /**
+     * Constructor for Host info response.
+     *
+     * @return void
+     */
     public function __construct()
     {
         parent::__construct(
@@ -22,6 +27,12 @@ class Host extends AbstractInfo
         );
     }
 
+    /**
+     * Populate status array from XML data.
+     *
+     * @param SimpleXMLElement $infData The information data element.
+     * @return void
+     */
     public function statusArrPopulate(SimpleXMLElement $infData)
     {
         if (null === $infData->status) {
@@ -42,7 +53,8 @@ class Host extends AbstractInfo
      * associates them to the host object,
      * If there is no "ip" attribute it defaults to "v4".
      *
-     * @param SimpleXMLElement $infData
+     * @param SimpleXMLElement $infData The information data element.
+     * @return void
      */
     public function ipCheck(SimpleXMLElement $infData)
     {
@@ -63,11 +75,22 @@ class Host extends AbstractInfo
         }
     }
 
+    /**
+     * Get the host nameserver object.
+     *
+     * @return Nameserver|null The nameserver object or null.
+     */
     public function getHost()
     {
         return $this->object;
     }
 
+    /**
+     * Add information data to the host object.
+     *
+     * @param SimpleXMLElement $infData The information data element.
+     * @return void
+     */
     protected function addInfData(SimpleXMLElement $infData)
     {
         $this->object->setHostName($infData->name);
@@ -78,11 +101,23 @@ class Host extends AbstractInfo
         $this->object->setId($infData->roid);
     }
 
+    /**
+     * Set the value from XML data.
+     *
+     * @param SimpleXMLElement $name The name element.
+     * @return void
+     */
     protected function setValue(SimpleXMLElement $name)
     {
         $this->object->setHostName((string)$name);
     }
 
+    /**
+     * Add extension data to the host object.
+     *
+     * @param SimpleXMLElement|null $extension The extension data element.
+     * @return void
+     */
     protected function addExtensionData(SimpleXMLElement $extension = null)
     {
         //

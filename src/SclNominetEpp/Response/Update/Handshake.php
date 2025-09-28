@@ -16,7 +16,7 @@ class Handshake extends Response
      *
      * @var HandshakeObject
      */
-    private $handshake;
+    private HandshakeObject $handshake;
 
     /**
      * Constructor
@@ -29,7 +29,7 @@ class Handshake extends Response
     /**
      * {@inheritDoc}
      *
-     * @param SimpleXMLElement $xml
+     * @param SimpleXMLElement $xml The XML element to process.
      * @return void
      */
     protected function processData(SimpleXMLElement $xml)
@@ -62,7 +62,12 @@ class Handshake extends Response
         }
     }
 
-    public function getHandshake()
+    /**
+     * Get the handshake object.
+     *
+     * @return HandshakeObject The handshake object.
+     */
+    public function getHandshake(): HandshakeObject
     {
         return $this->handshake;
     }

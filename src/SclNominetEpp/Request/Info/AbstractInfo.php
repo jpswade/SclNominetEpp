@@ -14,7 +14,6 @@ use SimpleXMLElement;
  */
 abstract class AbstractInfo extends Request
 {
-
     /**
      * The namespace for the Nominet EPP info request.
      */
@@ -31,29 +30,29 @@ abstract class AbstractInfo extends Request
      */
     protected ?object $object = null;
 
+    protected string $type;
+
     /**
      * Constructor
      *
-     * @param string                $type          The type of info operation.
-     * @param string                $infoNamespace The namespace for the info operation.
-     * @param string                $valueName     The name of the value being queried.
-     * @param SimpleXMLElement|null $response      The response object.
+     * @param string $type The type of info operation.
+     * @param string $infoNamespace The namespace for the info operation.
+     * @param string $valueName The name of the value being queried.
+     * @param SimpleXMLElement|null $response The response object.
      */
-    public function __construct(string $type, string $infoNamespace, string $valueName, $response = null)
-    {
+    public function __construct(
+        string $type,
+        string $infoNamespace,
+        string $valueName,
+        ?SimpleXMLElement $response = null
+    ) {
         parent::__construct('info', $response);
         $this->type = $type;
         $this->valueName = $valueName;
         $this->infoNamespace = $infoNamespace;
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @param SimpleXMLElement $action The XML action element.
-     * @return void
-     */
-    protected function addContent(SimpleXMLElement $action)
+    protected function addContent(SimpleXMLElement $action): void
     {
         $info = $action->addChild("{$this->type}:info", '', $this->infoNamespace);
 

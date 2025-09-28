@@ -10,11 +10,12 @@ use SimpleXMLElement;
  */
 class Unrenew extends Response
 {
-    public function __construct()
-    {
-        // @todo
-    }
-
+    /**
+     * Process the XML data for unrenew response.
+     *
+     * @param SimpleXMLElement $xml The XML element to process.
+     * @return void
+     */
     public function processData(SimpleXMLElement $xml)
     {
         if (!$this->success()) {

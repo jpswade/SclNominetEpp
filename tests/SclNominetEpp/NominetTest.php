@@ -13,8 +13,10 @@ class NominetTest extends TestCase
      * Test that Nominet login method should NOT throw TypeError when newPassword is null
      * This test should FAIL initially, demonstrating the bug we need to fix
      * After our fix, this test should pass (no TypeError should be thrown)
+     *
+     * @return void
      */
-    public function testNominetLoginWithNullNewPasswordShouldNotThrowTypeError()
+    public function testNominetLoginWithNullNewPasswordShouldNotThrowTypeError(): void
     {
         $nominet = new Nominet();
         try {

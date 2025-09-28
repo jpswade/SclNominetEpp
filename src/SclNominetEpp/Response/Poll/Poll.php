@@ -13,7 +13,6 @@ use SimpleXMLElement;
  */
 class Poll extends Response
 {
-
     /**
      *
      * @var PollObject

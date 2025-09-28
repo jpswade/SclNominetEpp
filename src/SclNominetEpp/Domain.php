@@ -126,6 +126,9 @@ class Domain
 
     /**
      * Set add $contact to array of contacts
+     *
+     * @param Contact $contact The contact to add.
+     * @return void
      */
     public function addContact(Contact $contact)
     {
@@ -134,6 +137,9 @@ class Domain
 
     /**
      * Remove $contact from the array of contacts if it already exists.
+     *
+     * @param Contact $contact The contact to remove.
+     * @return void
      */
     public function removeContact(Contact $contact)
     {
@@ -143,6 +149,9 @@ class Domain
 
     /**
      * Add $nameserver to the array of nameservers
+     *
+     * @param Nameserver $nameserver The nameserver to add.
+     * @return void
      */
     public function addNameserver(Nameserver $nameserver)
     {
@@ -151,6 +160,9 @@ class Domain
 
     /**
      * Remove $nameserver from the array of nameservers if it already exists.
+     *
+     * @param Nameserver $nameserver The nameserver to remove.
+     * @return void
      */
     public function removeNameserver(Nameserver $nameserver)
     {
@@ -158,16 +170,32 @@ class Domain
         unset($this->nameservers[$arrayKey]);
     }
 
+    /**
+     * Convert domain to string representation.
+     *
+     * @return string The domain name.
+     */
     public function __toString()
     {
         return $this->getName();
     }
 
+    /**
+     * Get the domain name.
+     *
+     * @return string The domain name.
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
+    /**
+     * Set the domain name.
+     *
+     * @param string $name The domain name to set.
+     * @return void
+     */
     public function setName(string $name)
     {
         if (filter_var($name, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME) === false) {
@@ -176,6 +204,11 @@ class Domain
         $this->name = $name;
     }
 
+    /**
+     * Convert domain to array representation.
+     *
+     * @return array The domain data as an array.
+     */
     public function __toArray(): array
     {
         $data = [];
@@ -200,13 +233,21 @@ class Domain
         return $data;
     }
 
+    /**
+     * Get the registration period.
+     *
+     * @return integer The registration period in years.
+     */
     public function getPeriod(): int
     {
         return $this->period;
     }
 
     /**
-     * Set the value of period
+     * Set the value of period.
+     *
+     * @param integer $period The registration period in years.
+     * @return Domain This domain instance.
      */
     public function setPeriod(int $period): Domain
     {
@@ -219,11 +260,22 @@ class Domain
         return $this;
     }
 
+    /**
+     * Get the registrant identifier.
+     *
+     * @return string|null The registrant identifier.
+     */
     public function getRegistrant(): ?string
     {
         return $this->registrant;
     }
 
+    /**
+     * Set the registrant identifier.
+     *
+     * @param string|null $registrant The registrant identifier.
+     * @return void
+     */
     public function setRegistrant(?string $registrant)
     {
         $this->registrant = $registrant;
@@ -248,6 +300,8 @@ class Domain
 
     /**
      * Get the identifier of the sponsoring client.
+     *
+     * @return string The client identifier.
      */
     public function getClientID(): string
     {
@@ -256,6 +310,9 @@ class Domain
 
     /**
      * Set the identifier of the sponsoring client.
+     *
+     * @param string $clientID The client identifier.
+     * @return void
      */
     public function setClientID(string $clientID)
     {
@@ -264,6 +321,8 @@ class Domain
 
     /**
      * Get the identifier of the client that created the domain object.
+     *
+     * @return string The creator identifier.
      */
     public function getCreatorID(): string
     {
@@ -272,53 +331,107 @@ class Domain
 
     /**
      * Set the identifier of the client that created the domain object.
+     *
+     * @param string $creatorID The creator identifier.
+     * @return void
      */
     public function setCreatorID(string $creatorID)
     {
         $this->creatorID = $creatorID;
     }
 
+    /**
+     * Get the creation date.
+     *
+     * @return DateTime The creation date.
+     */
     public function getCreated(): DateTime
     {
         return $this->created;
     }
 
+    /**
+     * Set the creation date.
+     *
+     * @param DateTime $created The creation date.
+     * @return void
+     */
     public function setCreated(DateTime $created)
     {
         $this->created = $created;
     }
 
+    /**
+     * Get the expiration date.
+     *
+     * @return DateTime The expiration date.
+     */
     public function getExpired(): DateTime
     {
         return $this->expired;
     }
 
+    /**
+     * Set the expiration date.
+     *
+     * @param DateTime $expired The expiration date.
+     * @return void
+     */
     public function setExpired(DateTime $expired)
     {
         $this->expired = $expired;
     }
 
+    /**
+     * Get the update identifier.
+     *
+     * @return string|null The update identifier.
+     */
     public function getUpID(): ?string
     {
         return $this->upID;
     }
 
+    /**
+     * Set the update identifier.
+     *
+     * @param string $upID The update identifier.
+     * @return void
+     */
     public function setUpID(string $upID)
     {
         $this->upID = $upID;
     }
 
+    /**
+     * Get the first bill setting.
+     *
+     * @return string The first bill setting.
+     */
     public function getFirstBill(): string
     {
         return $this->firstBill;
     }
 
+    /**
+     * Set the first bill setting.
+     *
+     * @param string $firstBill The first bill setting.
+     * @return void
+     */
     public function setFirstBill(string $firstBill)
     {
         $this->checkBill($firstBill);
         $this->firstBill = $firstBill;
     }
 
+    /**
+     * Check if the bill setting is valid.
+     *
+     * @param string $bill The bill setting to check.
+     * @return void
+     * @throws InvalidArgumentException If the bill setting is invalid.
+     */
     protected function checkBill(string $bill): void
     {
         if ($bill === '') {
@@ -331,24 +444,42 @@ class Domain
         }
     }
 
+    /**
+     * Get the recurring bill setting.
+     *
+     * @return string The recurring bill setting.
+     */
     public function getRecurBill(): string
     {
         return $this->recurBill;
     }
 
+    /**
+     * Set the recurring bill setting.
+     *
+     * @param string $recurBill The recurring bill setting.
+     * @return void
+     */
     public function setRecurBill(string $recurBill)
     {
         $this->checkBill($recurBill);
         $this->recurBill = $recurBill;
     }
 
+    /**
+     * Get the auto bill setting.
+     *
+     * @return integer|null The auto bill setting.
+     */
     public function getAutoBill(): ?int
     {
         return $this->autoBill;
     }
 
     /**
-     * @param integer|object $autoBill
+     * Set the auto bill setting.
+     *
+     * @param integer|object $autoBill The auto bill setting.
      * @return void
      */
     public function setAutoBill($autoBill)
@@ -356,13 +487,20 @@ class Domain
         $this->autoBill = (int)$autoBill;
     }
 
+    /**
+     * Get the next bill setting.
+     *
+     * @return integer|null The next bill setting.
+     */
     public function getNextBill(): ?int
     {
         return $this->nextBill;
     }
 
     /**
-     * @param integer|object $nextBill
+     * Set the next bill setting.
+     *
+     * @param integer|object $nextBill The next bill setting.
      * @return void
      */
     public function setNextBill($nextBill)
@@ -370,11 +508,22 @@ class Domain
         $this->nextBill = (int)$nextBill;
     }
 
+    /**
+     * Get the registration status.
+     *
+     * @return string The registration status.
+     */
     public function getRegStatus(): string
     {
         return $this->regStatus;
     }
 
+    /**
+     * Set the registration status.
+     *
+     * @param string $regStatus The registration status.
+     * @return void
+     */
     public function setRegStatus(string $regStatus)
     {
         $this->regStatus = $regStatus;
@@ -388,36 +537,73 @@ class Domain
         return $this->notes;
     }
 
+    /**
+     * Set the notes array.
+     *
+     * @param array $notes The notes array.
+     * @return void
+     */
     public function setNotes(array $notes)
     {
         $this->notes = $notes;
     }
 
+    /**
+     * Get the password.
+     *
+     * @return string|null The password.
+     */
     public function getPassword(): ?string
     {
         return $this->password;
     }
 
+    /**
+     * Set the password.
+     *
+     * @param string $password The password.
+     * @return void
+     */
     public function setPassword(string $password)
     {
         $this->password = $password;
     }
 
+    /**
+     * Check if password is set.
+     *
+     * @return boolean True if password is set.
+     */
     public function hasPassword(): bool
     {
         return isset($this->password);
     }
 
+    /**
+     * Check if auto bill is set.
+     *
+     * @return boolean True if auto bill is set.
+     */
     public function hasAutoBill(): bool
     {
         return isset($this->autoBill);
     }
 
+    /**
+     * Check if next bill is set.
+     *
+     * @return boolean True if next bill is set.
+     */
     public function hasNextBill(): bool
     {
         return isset($this->nextBill);
     }
 
+    /**
+     * Check if notes are set.
+     *
+     * @return boolean True if notes are set.
+     */
     public function hasNotes(): bool
     {
         return isset($this->notes);

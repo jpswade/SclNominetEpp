@@ -78,12 +78,22 @@ abstract class AbstractRelease extends Request
     }
 
     /**
+     * Get the registrar tag.
+     *
+     * @return string The registrar tag.
+     */
+    public function getRegistrarTag(): string
+    {
+        return $this->registrarTag;
+    }
+
+    /**
      * Add content to the request form.
      *
      * @param SimpleXMLElement $action The XML action element.
      * @return void
      */
-    public function addContent(SimpleXMLElement $action)
+    public function addContent(SimpleXMLElement $action): void
     {
         $releaseNS  = $this->updateNamespace;
 

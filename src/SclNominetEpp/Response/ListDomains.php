@@ -15,6 +15,12 @@ class ListDomains extends Response
 
     protected array $domains = [];
 
+    /**
+     * Process the XML data for list domains response.
+     *
+     * @param SimpleXMLElement $xml The XML element to process.
+     * @return void
+     */
     protected function processData(SimpleXMLElement $xml): void
     {
         if (!$this->success()) {
@@ -33,6 +39,11 @@ class ListDomains extends Response
         }
     }
 
+    /**
+     * Get the list of domains.
+     *
+     * @return array The array of domain names.
+     */
     public function getDomains(): array
     {
         return $this->domains;
