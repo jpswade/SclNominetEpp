@@ -89,7 +89,7 @@ class Greeting
     /**
      * The protocol version supported by the server.
      */
-    protected float $version;
+    protected string $version;
 
     /**
      * Language known by the server.
