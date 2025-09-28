@@ -61,18 +61,13 @@ class Host extends AbstractCreate
         return true;
     }
 
-
-    /**
-     *
-     * @param Nameserver $object
-     */
     public function setNameserver(Nameserver $object)
     {
         $this->object = $object;
     }
 
 
-    protected function getName()
+    protected function getName(): string
     {
         return $this->object->getHostName();
     }

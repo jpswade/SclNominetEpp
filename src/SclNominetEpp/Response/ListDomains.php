@@ -10,18 +10,12 @@ use SimpleXMLElement;
  */
 class ListDomains extends Response
 {
-    const LIST_MONTH  = 1;
-    const LIST_EXPIRY = 2;
+    public const LIST_MONTH = 1;
+    public const LIST_EXPIRY = 2;
 
-    protected $domains = [];
+    protected array $domains = [];
 
-    /**
-     * {@inheritDoc}
-     *
-     * @param SimpleXMLElement $xml
-     * @return void
-     */
-    protected function processData(SimpleXMLElement $xml)
+    protected function processData(SimpleXMLElement $xml): void
     {
         if (!$this->success()) {
             return;
@@ -35,15 +29,11 @@ class ListDomains extends Response
         $domains = $xml->response->resData->children($ns['list'])->listData;
 
         foreach ($domains->domainName as $domain) {
-            $this->domains[] = (string) $domain;
+            $this->domains[] = (string)$domain;
         }
     }
 
-    /**
-     *
-     * @return array
-     */
-    public function getDomains()
+    public function getDomains(): array
     {
         return $this->domains;
     }

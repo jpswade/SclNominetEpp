@@ -108,7 +108,6 @@ class Response implements ResponseInterface
 
     /**
      * @throws InvalidResponsePacketException
-     * @throws \Exception
      */
     public function init($data)
     {
@@ -124,7 +123,7 @@ class Response implements ResponseInterface
         $this->data = $data;
 
         if (!$this->isErrorCode($this->code) && !$this->isSuccessCode($this->code)) {
-            throw RuntimeException::unexpectedResultCode($this->code, $this->message);
+            RuntimeException::unexpectedResultCode($this->code, $this->message);
         }
 
         $this->processData($data);

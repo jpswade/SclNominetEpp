@@ -13,7 +13,7 @@ use SclNominetEpp\Greeting as GreetingObject;
  */
 class Greeting extends Response
 {
-    protected $greetingObject;
+    protected GreetingObject $greetingObject;
 
     /**
      * @throws \Exception
@@ -36,7 +36,6 @@ class Greeting extends Response
             return;
         }
         $this->greetingObject = new GreetingObject();
-        $ns = $xml->getNamespaces(true);
         $this->greetingObject->setServerId($xml->greeting->svID);
         $this->greetingObject->setServerDate(new DateTime($xml->greeting->svDate));
         $serviceMenu = $xml->greeting->svcMenu;

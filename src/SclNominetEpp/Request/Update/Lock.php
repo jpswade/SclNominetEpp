@@ -54,9 +54,9 @@ class Lock extends Request
      *
      * @param string $object
      * @param string $type
-     * @param object $response
+     * @param object|null $response
      */
-    public function __construct($object, $type, $response = null)
+    public function __construct(string $object, string $type, ?object $response = null)
     {
         parent::__construct('update', $response);
         if (in_array($object, self::$objects)) {

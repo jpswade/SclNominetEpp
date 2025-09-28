@@ -20,48 +20,48 @@ use SclRequestResponse\ResponseInterface;
  */
 class Nominet extends AbstractRequestResponse
 {
-    /*
+    /**
      * A client MUST NOT alter status values set by the server.
      * A server MAY alter or override status values set by a client, subject to local server policies.
      * Status values that can be added or removed by a client are prefixed with "client".
      */
-    const STATUS_CLIENT_DELETE_PROHIBITED   = 'clientDeleteProhibited';
-    const STATUS_CLIENT_HOLD                = 'clientHold';
-    const STATUS_CLIENT_RENEW               = 'clientRenewProhibited';
-    const STATUS_CLIENT_TRANSFER_PROHIBITED = 'clientTransferProhibited';
-    const STATUS_CLIENT_UPDATE_PROHIBITED   = 'clientUpdateProhibited';
+    public const STATUS_CLIENT_DELETE_PROHIBITED   = 'clientDeleteProhibited';
+    public const STATUS_CLIENT_HOLD                = 'clientHold';
+    public const STATUS_CLIENT_RENEW               = 'clientRenewProhibited';
+    public const STATUS_CLIENT_TRANSFER_PROHIBITED = 'clientTransferProhibited';
+    public const STATUS_CLIENT_UPDATE_PROHIBITED   = 'clientUpdateProhibited';
 
     // Corresponding status values that can be added or removed by a server are prefixed with "server".
-    const STATUS_SERVER_DELETE_PROHIBITED   = 'serverDeleteProhibited';
-    const STATUS_SERVER_HOLD                = 'serverHold';
-    const STATUS_SERVER_RENEW               = 'serverRenewProhibited';
-    const STATUS_SERVER_TRANSFER_PROHIBITED = 'serverTransferProhibited';
-    const STATUS_SERVER_UPDATE_PROHIBITED   = 'serverUpdateProhibited';
+    public const STATUS_SERVER_DELETE_PROHIBITED   = 'serverDeleteProhibited';
+    public const STATUS_SERVER_HOLD                = 'serverHold';
+    public const STATUS_SERVER_RENEW               = 'serverRenewProhibited';
+    public const STATUS_SERVER_TRANSFER_PROHIBITED = 'serverTransferProhibited';
+    public const STATUS_SERVER_UPDATE_PROHIBITED   = 'serverUpdateProhibited';
 
-    /*
+    /**
      * pending[action]" status MUST NOT be combined
      * with either:-
      * "client[action]Prohibited" or
      * "server[action]Prohibited" status or
      * other "pending[action]" status.
      */
-    const STATUS_PENDING_CREATE   = 'pendingCreate';
-    const STATUS_PENDING_DELETE   = 'pendingDelete';
-    const STATUS_PENDING_RENEW    = 'pendingRenew';
-    const STATUS_PENDING_TRANSFER = 'pendingTransfer';
-    const STATUS_PENDING_UPDATE   = 'pendingUpdate';
+    public const STATUS_PENDING_CREATE   = 'pendingCreate';
+    public const STATUS_PENDING_DELETE   = 'pendingDelete';
+    public const STATUS_PENDING_RENEW    = 'pendingRenew';
+    public const STATUS_PENDING_TRANSFER = 'pendingTransfer';
+    public const STATUS_PENDING_UPDATE   = 'pendingUpdate';
 
-    const STATUS_INACTIVE = 'inactive';
+    public const STATUS_INACTIVE = 'inactive';
 
-    //"ok" status MUST NOT be combined with any other status.
-    const STATUS_OKAY = 'ok';
+    /** "ok" status MUST NOT be combined with any other status. */
+    public const STATUS_OKAY = 'ok';
 
     /**
      * Flag that states whether we are logged into Nominet or not.
      *
      * @var boolean
      */
-    private $loggedIn = false;
+    private bool $loggedIn = false;
 
     /**
      * Disconnect cleanly if we are still logged in.
@@ -93,14 +93,17 @@ class Nominet extends AbstractRequestResponse
      *
      * @param  string $tag
      * @param  string $password
-     * @param  string $newPassword If specified with change the password.
+     * @param  null|string $newPassword If specified with change the password.
      * @return boolean True if the login was successful.
      */
-    public function login($tag, $password, $newPassword = null)
+    public function login(string $tag, string $password, ?string $newPassword = null): bool
     {
         $request = new Request\Login();
-        $request->setCredentials($tag, $password)
-            ->changePassword($newPassword);
+        $request->setCredentials($tag, $password);
+
+        if ($newPassword !== null) {
+            $request->changePassword($newPassword);
+        }
 
         $response = $this->processRequest($request);
 
@@ -117,24 +120,24 @@ class Nominet extends AbstractRequestResponse
      * and may be used to keep your connection with our EPP server open.
      * Sending an EPP <hello> command every 59 minutes will keep your connection
      * with our EPP server open.
+     * @throws LoginRequiredException
      */
-    public function hello()
+    public function hello(): ResponseInterface
     {
         $this->loginCheck();
 
         $request = new Request\Hello('hello', new \SclNominetEpp\Response\Greeting());
 
-        $response = $this->processRequest($request);
-
-        // TODO Do something with the response
+        return $this->processRequest($request);
     }
 
     /**
      * A <logout> command is used to end a session with an EPP server. On receipt
      * the EPP server responds and then closes the connection with the client.
      * @return boolean
+     * @throws LoginRequiredException
      */
-    public function logout()
+    public function logout(): bool
     {
         $this->loginCheck();
 
@@ -201,8 +204,9 @@ class Nominet extends AbstractRequestResponse
      * successful.
      *
      * @param string|array $hosts
+     * @throws LoginRequiredException
      */
-    public function checkHost($hosts)
+    public function checkHost($hosts): ResponseInterface
     {
         $this->loginCheck();
 
@@ -220,8 +224,9 @@ class Nominet extends AbstractRequestResponse
      * account.
      *
      * @param Contact $contact
+     * @throws LoginRequiredException
      */
-    public function createContact(Contact $contact)
+    public function createContact(Contact $contact): bool
     {
         $this->loginCheck();
 
@@ -238,8 +243,10 @@ class Nominet extends AbstractRequestResponse
      * account or nameserver object to link to domain names.
      *
      * @param Domain $domain
+     * @return bool
+     * @throws LoginRequiredException
      */
-    public function createDomain(Domain $domain)
+    public function createDomain(Domain $domain): bool
     {
         $this->loginCheck();
 
@@ -255,11 +262,13 @@ class Nominet extends AbstractRequestResponse
      * The <create> command allows you to create a nameserver object to link to domain names.
      *
      * @param Nameserver $host
+     * @return bool
+     * @throws LoginRequiredException
      */
-    public function createHost(Nameserver $host)
+    public function createHost(Nameserver $host): bool
     {
         $this->loginCheck();
-        $request = new Request\Create\Host($host);
+        $request = new Request\Create\Host();
 
         $request->setNameserver($host);
 
@@ -275,6 +284,7 @@ class Nominet extends AbstractRequestResponse
      *
      * @param Domain|string $domain
      * @return boolean
+     * @throws LoginRequiredException
      */
     public function deleteDomain(Domain $domain): bool
     {
@@ -293,19 +303,18 @@ class Nominet extends AbstractRequestResponse
      * The <renew> command only applies to domain names. It has no meaning for
      * other object types.
      *
-     * @param string        $domain  The domain to be renewed
+     * @param string $domain The domain to be renewed
      * @param DateTime|NULL $expDate The new expiry data or NULL
+     * @throws LoginRequiredException
      */
-    public function renew($domain, $expDate)
+    public function renew(string $domain, ?DateTime $expDate): ResponseInterface
     {
         $this->loginCheck();
 
         $request = new Request\Renew();
         $request->setDomain($domain, $expDate);
 
-        $response = $this->processRequest($request);
-
-        return $response;
+        return $this->processRequest($request);
     }
 
     /**
@@ -314,11 +323,13 @@ class Nominet extends AbstractRequestResponse
      * meaning for other object types.
      * @throws LoginRequiredException
      */
-    public function unrenew()
+    public function unrenew(): ResponseInterface
     {
         $this->loginCheck();
 
         $request = new Unrenew();
+
+        return $this->processRequest($request);
     }
 
     /**
@@ -340,6 +351,7 @@ class Nominet extends AbstractRequestResponse
     /**
      * The <update> operation allows the attributes of an object to be updated.
      * @param Contact $contact The contact to be updated.
+     * @throws LoginRequiredException
      */
     public function updateContact(Contact $contact): ResponseInterface
     {
@@ -356,6 +368,7 @@ class Nominet extends AbstractRequestResponse
 
     /**
      * The <update> operation allows the attributes of an object to be updated.
+     * @throws LoginRequiredException
      */
     public function updateContactID($value): ResponseInterface
     {
@@ -371,8 +384,9 @@ class Nominet extends AbstractRequestResponse
     /**
      * The <update> operation allows the attributes of an object to be updated.
      * @param Nameserver $host The nameserver to be updated.
+     * @throws LoginRequiredException
      */
-    public function updateHost(Nameserver $host)
+    public function updateHost(Nameserver $host): ResponseInterface
     {
         $this->loginCheck();
 
@@ -382,9 +396,7 @@ class Nominet extends AbstractRequestResponse
 
         $request->add(new Update\Field\HostAddress('192.0.2.2', 'v4'));
 
-        $response = $this->processRequest($request);
-
-        return $response;
+        return $this->processRequest($request);
     }
 
     /**
@@ -421,7 +433,7 @@ class Nominet extends AbstractRequestResponse
      * @return boolean
      * @throws LoginRequiredException
      */
-    public function contactInfo($contactID)
+    public function contactInfo(string $contactID): bool
     {
         $this->loginCheck();
 
@@ -433,9 +445,7 @@ class Nominet extends AbstractRequestResponse
         if (!$response->success()) {
             return false;
         }
-        $contact = $response->getContact();
-
-        return $contact;
+        return $response->getContact();
     }
 
     /**
@@ -444,8 +454,9 @@ class Nominet extends AbstractRequestResponse
      *
      * @param string $hostName The host name to query.
      * @return Nameserver|null The nameserver object or null if not found.
+     * @throws LoginRequiredException
      */
-    public function hostInfo(string $hostName)
+    public function hostInfo(string $hostName): ?Nameserver
     {
         $this->loginCheck();
 
@@ -454,9 +465,7 @@ class Nominet extends AbstractRequestResponse
         $request->lookup($hostName);
 
         $response = $this->processRequest($request);
-        $host = $response->getHost();
-
-        return $host;
+        return $response->getHost();
     }
 
     /**
@@ -479,6 +488,7 @@ class Nominet extends AbstractRequestResponse
      * NOTE: To use the <poll> command you must have activated this notification
      * option for your account in the Online Service. In addition, version 1.1
      * or subsequent schemas must be used if polling via Nominet EPP.
+     * @throws LoginRequiredException
      */
     public function poll()
     {
@@ -488,6 +498,7 @@ class Nominet extends AbstractRequestResponse
     /**
      * The <handshake> operation allows a registrar to accept or reject a
      * registrar change/registrant transfer authorisation request.
+     * @throws LoginRequiredException
      */
     public function handshake()
     {
@@ -497,6 +508,7 @@ class Nominet extends AbstractRequestResponse
     /**
      * The <release> operation allows a registrar to move a domain name, or
      * account onto another tag.
+     * @throws LoginRequiredException
      */
     public function releaseContact($id)
     {
@@ -511,6 +523,7 @@ class Nominet extends AbstractRequestResponse
     /**
      * The <release> operation allows a registrar to move a domain name, or
      * account onto another tag.
+     * @throws LoginRequiredException
      */
     public function releaseDomain($name)
     {
@@ -525,6 +538,7 @@ class Nominet extends AbstractRequestResponse
     /**
      * The <fork> command allows a number of domain names on a registrant contact
      * to be moved to a copy of that contact.
+     * @throws LoginRequiredException
      */
     public function fork(string $hostName)
     {
@@ -542,11 +556,12 @@ class Nominet extends AbstractRequestResponse
      * Retrieves a domain list.
      * NOTE: This method is called domainList as list is a resevered word :-(
      *
-     * @param  integer      $year
-     * @param  integer      $month
-     * @param  integer|null $type
+     * @param integer $year
+     * @param integer $month
+     * @param integer|null $type
+     * @throws LoginRequiredException
      */
-    public function listDomains($year, $month, $type = ListDomains::LIST_MONTH)
+    public function listDomains(int $year, int $month, ?int $type = ListDomains::LIST_MONTH)
     {
         $this->loginCheck();
 
@@ -566,19 +581,18 @@ class Nominet extends AbstractRequestResponse
      * The investigation <lock> command can be used to lock down a domain name,
      * preventing a number of operations upon it.
      */
-    public function lock($objectName, $type)
+    public function lock(string $objectName, string $type): ResponseInterface
     {
         $this->loginCheck();
 
         $request = new Update\Lock($objectName, $type);
 
-        $response = $this->processRequest($request);
-
-        return $response;
+        return $this->processRequest($request);
     }
 
     /**
      * The reseller create command is used to define a new reseller on your tag
+     * @throws LoginRequiredException
      */
     public function resellerCreate()
     {
@@ -587,6 +601,7 @@ class Nominet extends AbstractRequestResponse
 
     /**
      * The reseller delete command is used to remove a reseller from your tag.
+     * @throws LoginRequiredException
      */
     public function resellerDelete()
     {
@@ -596,6 +611,7 @@ class Nominet extends AbstractRequestResponse
     /**
      * The reseller info command returns all information associated with a
      * reseller on your tag.
+     * @throws LoginRequiredException
      */
     public function resellerInfo()
     {
@@ -605,6 +621,7 @@ class Nominet extends AbstractRequestResponse
     /**
      * The reseller list command returns information about all resellers on
      * your tag.
+     * @throws LoginRequiredException
      */
     public function resellerList()
     {
@@ -614,6 +631,7 @@ class Nominet extends AbstractRequestResponse
     /**
      * The reseller update command is used to modify the attributes of an
      * existing reseller on your tag.
+     * @throws LoginRequiredException
      */
     public function resellerUpdate()
     {
