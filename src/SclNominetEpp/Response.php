@@ -94,20 +94,21 @@ class Response implements ResponseInterface
     /**
      * The response code.
      */
-    protected int $code;
+    protected ?int $code = null;
 
     /**
      * The response message.
      */
-    protected string $message;
+    protected ?string $message = null;
 
     /**
      * Any extra response data.
      */
-    protected SimpleXMLElement $data;
+    protected ?SimpleXMLElement $data = null;
 
     /**
      * @throws InvalidResponsePacketException
+     * @throws \Exception
      */
     public function init($data)
     {
@@ -161,6 +162,9 @@ class Response implements ResponseInterface
      */
     public function success(): bool
     {
+        if ($this->code === null) {
+            throw new RuntimeException('Response not initialized. Call init() first.');
+        }
         return $this->isSuccessCode($this->code);
     }
 
@@ -179,6 +183,9 @@ class Response implements ResponseInterface
      */
     public function code(): int
     {
+        if ($this->code === null) {
+            throw new RuntimeException('Response not initialized. Call init() first.');
+        }
         return $this->code;
     }
 
@@ -187,6 +194,9 @@ class Response implements ResponseInterface
      */
     public function message(): string
     {
+        if ($this->message === null) {
+            throw new RuntimeException('Response not initialized. Call init() first.');
+        }
         return $this->message;
     }
 
@@ -195,6 +205,9 @@ class Response implements ResponseInterface
      */
     public function data(): SimpleXMLElement
     {
+        if ($this->data === null) {
+            throw new RuntimeException('Response not initialized. Call init() first.');
+        }
         return $this->data;
     }
 }
