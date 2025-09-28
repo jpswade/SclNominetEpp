@@ -13,13 +13,17 @@ use SclNominetEpp\Response\Create\Contact as CreateContactResponse;
  */
 class Contact extends AbstractCreate
 {
-
     const TYPE = 'contact';
     const CREATE_NAMESPACE = 'urn:ietf:params:xml:ns:contact-1.0';
     const VALUE_NAME = 'id';
     const DUMMY_PASSWORD = 'qwerty';
     const POSTAL_INFO_TYPE = 'loc';
 
+    /**
+     * Constructor for Contact create request.
+     *
+     * @return void
+     */
     public function __construct()
     {
         parent::__construct(
@@ -34,7 +38,8 @@ class Contact extends AbstractCreate
      * This function is used to add Object specific content
      * to the Abstract class' implementation of addContent
      *
-     * @param SimpleXMLElement $create
+     * @param SimpleXMLElement $create The XML element to add content to.
+     * @return void
      */
     protected function addSpecificContent(SimpleXMLElement $create)
     {
@@ -67,7 +72,9 @@ class Contact extends AbstractCreate
     /**
      * An Exception is thrown if the object is not of type \SclNominetEpp\Contact
      *
-     * @throws InvalidArgumentException
+     * @param mixed $object The object to validate.
+     * @return boolean True if validation passes.
+     * @throws InvalidArgumentException When object is not a valid contact.
      */
     public function objectValidate($object): bool
     {
@@ -81,13 +88,19 @@ class Contact extends AbstractCreate
     /**
      * Set Contact to the passed ContactObject file.
      *
-     * @param ContactObject $object
+     * @param ContactObject $object The contact object to set.
+     * @return void
      */
     public function setContact(ContactObject $object)
     {
         $this->object = $object;
     }
 
+    /**
+     * Get the name of the contact.
+     *
+     * @return string The contact ID.
+     */
     protected function getName(): string
     {
         return $this->object->getId();

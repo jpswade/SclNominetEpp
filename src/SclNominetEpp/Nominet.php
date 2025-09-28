@@ -76,7 +76,8 @@ class Nominet extends AbstractRequestResponse
     /**
      * Check if we are logged into Nominet.
      *
-     * @throws LoginRequiredException
+     * @return void
+     * @throws LoginRequiredException When not logged in.
      */
     private function loginCheck()
     {
@@ -91,9 +92,9 @@ class Nominet extends AbstractRequestResponse
      * other EPP command and identifies and authenticates the tag to be used
      * by the session. An EPP session is terminated by a logout command.
      *
-     * @param  string $tag
-     * @param  string $password
-     * @param  null|string $newPassword If specified with change the password.
+     * @param string      $tag         The tag to authenticate with.
+     * @param string      $password    The password for authentication.
+     * @param string|null $newPassword If specified will change the password.
      * @return boolean True if the login was successful.
      */
     public function login(string $tag, string $password, ?string $newPassword = null): bool
@@ -120,7 +121,8 @@ class Nominet extends AbstractRequestResponse
      * and may be used to keep your connection with our EPP server open.
      * Sending an EPP <hello> command every 59 minutes will keep your connection
      * with our EPP server open.
-     * @throws LoginRequiredException
+     * @return ResponseInterface The greeting response.
+     * @throws LoginRequiredException When not logged in.
      */
     public function hello(): ResponseInterface
     {
@@ -134,8 +136,8 @@ class Nominet extends AbstractRequestResponse
     /**
      * A <logout> command is used to end a session with an EPP server. On receipt
      * the EPP server responds and then closes the connection with the client.
-     * @return boolean
-     * @throws LoginRequiredException
+     * @return boolean True if logout was successful.
+     * @throws LoginRequiredException When not logged in.
      */
     public function logout(): bool
     {
@@ -157,9 +159,9 @@ class Nominet extends AbstractRequestResponse
      * registered and provides a hint about whether a <check> command would be
      * successful.
      *
-     * @param string|array $domains
-     * @return array
-     * @throws LoginRequiredException
+     * @param string|array $domains The domain(s) to check.
+     * @return array The check results.
+     * @throws LoginRequiredException When not logged in.
      */
     public function checkDomain($domains)
     {
@@ -181,9 +183,9 @@ class Nominet extends AbstractRequestResponse
      * registered and provides a hint about whether a <check> command would be
      * successful.
      *
-     * @param string|array $contactIds
-     * @return ResponseInterface
-     * @throws LoginRequiredException
+     * @param string|array $contactIds The contact ID(s) to check.
+     * @return ResponseInterface The check response.
+     * @throws LoginRequiredException When not logged in.
      */
     public function checkContact($contactIds): ResponseInterface
     {
@@ -203,8 +205,9 @@ class Nominet extends AbstractRequestResponse
      * registered and provides a hint about whether a <check> command would be
      * successful.
      *
-     * @param string|array $hosts
-     * @throws LoginRequiredException
+     * @param string|array $hosts The host(s) to check.
+     * @return ResponseInterface The check response.
+     * @throws LoginRequiredException When not logged in.
      */
     public function checkHost($hosts): ResponseInterface
     {
@@ -223,8 +226,9 @@ class Nominet extends AbstractRequestResponse
      * The <create> command allows you to create a contact
      * account.
      *
-     * @param Contact $contact
-     * @throws LoginRequiredException
+     * @param Contact $contact The contact to create.
+     * @return boolean True if creation was successful.
+     * @throws LoginRequiredException When not logged in.
      */
     public function createContact(Contact $contact): bool
     {
@@ -242,9 +246,9 @@ class Nominet extends AbstractRequestResponse
      * The <create> command allows you to register a domain name or to create an
      * account or nameserver object to link to domain names.
      *
-     * @param Domain $domain
-     * @return bool
-     * @throws LoginRequiredException
+     * @param Domain $domain The domain to create.
+     * @return boolean True if creation was successful.
+     * @throws LoginRequiredException When not logged in.
      */
     public function createDomain(Domain $domain): bool
     {
@@ -261,9 +265,9 @@ class Nominet extends AbstractRequestResponse
     /**
      * The <create> command allows you to create a nameserver object to link to domain names.
      *
-     * @param Nameserver $host
-     * @return bool
-     * @throws LoginRequiredException
+     * @param Nameserver $host The nameserver to create.
+     * @return boolean True if creation was successful.
+     * @throws LoginRequiredException When not logged in.
      */
     public function createHost(Nameserver $host): bool
     {
@@ -282,9 +286,9 @@ class Nominet extends AbstractRequestResponse
      * Further details of this are available in RFC 5731 The delete command may
      * not be used to delete nameservers and accounts.
      *
-     * @param Domain|string $domain
-     * @return boolean
-     * @throws LoginRequiredException
+     * @param Domain $domain The domain to delete.
+     * @return boolean True if deletion was successful.
+     * @throws LoginRequiredException When not logged in.
      */
     public function deleteDomain(Domain $domain): bool
     {
@@ -303,9 +307,10 @@ class Nominet extends AbstractRequestResponse
      * The <renew> command only applies to domain names. It has no meaning for
      * other object types.
      *
-     * @param string $domain The domain to be renewed
-     * @param DateTime|NULL $expDate The new expiry data or NULL
-     * @throws LoginRequiredException
+     * @param string        $domain  The domain to be renewed.
+     * @param DateTime|null $expDate The new expiry date or null.
+     * @return ResponseInterface The renew response.
+     * @throws LoginRequiredException When not logged in.
      */
     public function renew(string $domain, ?DateTime $expDate): ResponseInterface
     {
@@ -321,7 +326,8 @@ class Nominet extends AbstractRequestResponse
      * The <unrenew> operation is used to reverse a renewal request made for a
      * domain name. The renew command only applies to domain names. It has no
      * meaning for other object types.
-     * @throws LoginRequiredException
+     * @return ResponseInterface The unrenew response.
+     * @throws LoginRequiredException When not logged in.
      */
     public function unrenew(): ResponseInterface
     {
@@ -334,7 +340,10 @@ class Nominet extends AbstractRequestResponse
 
     /**
      * The <update> operation allows the attributes of an object to be updated.
-     * @throws LoginRequiredException
+     * @param Domain      $domain        The domain to update.
+     * @param Domain|null $currentDomain The current domain state.
+     * @return ResponseInterface The update response.
+     * @throws LoginRequiredException When not logged in.
      */
     public function updateDomain(Domain $domain, Domain $currentDomain = null): ResponseInterface
     {
@@ -351,7 +360,8 @@ class Nominet extends AbstractRequestResponse
     /**
      * The <update> operation allows the attributes of an object to be updated.
      * @param Contact $contact The contact to be updated.
-     * @throws LoginRequiredException
+     * @return ResponseInterface The update response.
+     * @throws LoginRequiredException When not logged in.
      */
     public function updateContact(Contact $contact): ResponseInterface
     {
@@ -368,9 +378,11 @@ class Nominet extends AbstractRequestResponse
 
     /**
      * The <update> operation allows the attributes of an object to be updated.
-     * @throws LoginRequiredException
+     * @param string $value The contact ID value to update.
+     * @return ResponseInterface The update response.
+     * @throws LoginRequiredException When not logged in.
      */
-    public function updateContactID($value): ResponseInterface
+    public function updateContactID(string $value): ResponseInterface
     {
         $this->loginCheck();
 
@@ -384,7 +396,8 @@ class Nominet extends AbstractRequestResponse
     /**
      * The <update> operation allows the attributes of an object to be updated.
      * @param Nameserver $host The nameserver to be updated.
-     * @throws LoginRequiredException
+     * @return ResponseInterface The update response.
+     * @throws LoginRequiredException When not logged in.
      */
     public function updateHost(Nameserver $host): ResponseInterface
     {
@@ -403,7 +416,10 @@ class Nominet extends AbstractRequestResponse
      * The EPP <info> command is used to retrieve information associated with
      * an object.
      *
-     * @throws LoginRequiredException
+     * @param string $domainName The domain name to query.
+     * @return Domain The domain object.
+     * @throws LoginRequiredException When not logged in.
+     * @throws DomainException When domain is not found.
      */
     public function domainInfo(string $domainName): Domain
     {
@@ -429,9 +445,9 @@ class Nominet extends AbstractRequestResponse
      * The EPP <info> command is used to retrieve information associated with
      * an object. ($contactID is the $registrant from domainInfo)
      *
-     * @param string $contactID
-     * @return boolean
-     * @throws LoginRequiredException
+     * @param string $contactID The contact ID to query.
+     * @return boolean True if contact was found.
+     * @throws LoginRequiredException When not logged in.
      */
     public function contactInfo(string $contactID): bool
     {
@@ -454,7 +470,7 @@ class Nominet extends AbstractRequestResponse
      *
      * @param string $hostName The host name to query.
      * @return Nameserver|null The nameserver object or null if not found.
-     * @throws LoginRequiredException
+     * @throws LoginRequiredException When not logged in.
      */
     public function hostInfo(string $hostName): ?Nameserver
     {
@@ -488,7 +504,8 @@ class Nominet extends AbstractRequestResponse
      * NOTE: To use the <poll> command you must have activated this notification
      * option for your account in the Online Service. In addition, version 1.1
      * or subsequent schemas must be used if polling via Nominet EPP.
-     * @throws LoginRequiredException
+     * @return void
+     * @throws LoginRequiredException When not logged in.
      */
     public function poll()
     {
@@ -498,7 +515,8 @@ class Nominet extends AbstractRequestResponse
     /**
      * The <handshake> operation allows a registrar to accept or reject a
      * registrar change/registrant transfer authorisation request.
-     * @throws LoginRequiredException
+     * @return void
+     * @throws LoginRequiredException When not logged in.
      */
     public function handshake()
     {
@@ -508,9 +526,11 @@ class Nominet extends AbstractRequestResponse
     /**
      * The <release> operation allows a registrar to move a domain name, or
      * account onto another tag.
-     * @throws LoginRequiredException
+     * @param string $id The contact ID to release.
+     * @return Contact|null The released contact.
+     * @throws LoginRequiredException When not logged in.
      */
-    public function releaseContact($id)
+    public function releaseContact(string $id)
     {
         $this->loginCheck();
 
@@ -523,9 +543,11 @@ class Nominet extends AbstractRequestResponse
     /**
      * The <release> operation allows a registrar to move a domain name, or
      * account onto another tag.
-     * @throws LoginRequiredException
+     * @param string $name The domain name to release.
+     * @return Domain|null The released domain.
+     * @throws LoginRequiredException When not logged in.
      */
-    public function releaseDomain($name)
+    public function releaseDomain(string $name)
     {
         $this->loginCheck();
 
@@ -538,7 +560,9 @@ class Nominet extends AbstractRequestResponse
     /**
      * The <fork> command allows a number of domain names on a registrant contact
      * to be moved to a copy of that contact.
-     * @throws LoginRequiredException
+     * @param string $hostName The host name to fork.
+     * @return mixed The forked host.
+     * @throws LoginRequiredException When not logged in.
      */
     public function fork(string $hostName)
     {
@@ -556,10 +580,12 @@ class Nominet extends AbstractRequestResponse
      * Retrieves a domain list.
      * NOTE: This method is called domainList as list is a resevered word :-(
      *
-     * @param integer $year
-     * @param integer $month
-     * @param integer|null $type
-     * @throws LoginRequiredException
+     * @param integer      $year  The year to list domains for.
+     * @param integer      $month The month to list domains for.
+     * @param integer|null $type  The list type.
+     * @return mixed The list of domains.
+     * @throws LoginRequiredException When not logged in.
+     * @throws Exception When invalid type is provided.
      */
     public function listDomains(int $year, int $month, ?int $type = ListDomains::LIST_MONTH)
     {
@@ -580,6 +606,10 @@ class Nominet extends AbstractRequestResponse
     /**
      * The investigation <lock> command can be used to lock down a domain name,
      * preventing a number of operations upon it.
+     * @param string $objectName The object name to lock.
+     * @param string $type       The lock type.
+     * @return ResponseInterface The lock response.
+     * @throws LoginRequiredException When not logged in.
      */
     public function lock(string $objectName, string $type): ResponseInterface
     {
@@ -592,7 +622,8 @@ class Nominet extends AbstractRequestResponse
 
     /**
      * The reseller create command is used to define a new reseller on your tag
-     * @throws LoginRequiredException
+     * @return void
+     * @throws LoginRequiredException When not logged in.
      */
     public function resellerCreate()
     {
@@ -601,7 +632,8 @@ class Nominet extends AbstractRequestResponse
 
     /**
      * The reseller delete command is used to remove a reseller from your tag.
-     * @throws LoginRequiredException
+     * @return void
+     * @throws LoginRequiredException When not logged in.
      */
     public function resellerDelete()
     {
@@ -611,7 +643,8 @@ class Nominet extends AbstractRequestResponse
     /**
      * The reseller info command returns all information associated with a
      * reseller on your tag.
-     * @throws LoginRequiredException
+     * @return void
+     * @throws LoginRequiredException When not logged in.
      */
     public function resellerInfo()
     {
@@ -621,7 +654,8 @@ class Nominet extends AbstractRequestResponse
     /**
      * The reseller list command returns information about all resellers on
      * your tag.
-     * @throws LoginRequiredException
+     * @return void
+     * @throws LoginRequiredException When not logged in.
      */
     public function resellerList()
     {
@@ -631,7 +665,8 @@ class Nominet extends AbstractRequestResponse
     /**
      * The reseller update command is used to modify the attributes of an
      * existing reseller on your tag.
-     * @throws LoginRequiredException
+     * @return void
+     * @throws LoginRequiredException When not logged in.
      */
     public function resellerUpdate()
     {

@@ -32,9 +32,13 @@ abstract class AbstractInfo extends Response
     }
 
     /**
+     * Process the XML data from the response.
+     *
+     * @param SimpleXMLElement $xml The XML response data.
+     * @return void
      * @throws \Exception
      */
-    public function processData(SimpleXMLElement $xml)
+    public function processData(SimpleXMLElement $xml): void
     {
         if (!$this->success()) {
             return;

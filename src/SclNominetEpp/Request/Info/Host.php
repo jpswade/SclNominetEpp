@@ -13,6 +13,7 @@ class Host extends AbstractInfo
     const TYPE = 'host';
     const INFO_NAMESPACE = "urn:ietf:params:xml:ns:host-1.0";
     const VALUE_NAME = "name";
+    private Nameserver $nameserver;
 
     /**
      * Constructor
@@ -36,9 +37,12 @@ class Host extends AbstractInfo
         $this->nameserver = $nameserver;
     }
 
-    public function lookup(string $hostName)
+    public function lookup(string $hostName): Host
     {
-        // @todo
+        $nameserver = new Nameserver();
+        $nameserver->setHostName($hostName);
+        $this->setNameserver($nameserver);
+        return $this;
     }
 
     protected function getName()

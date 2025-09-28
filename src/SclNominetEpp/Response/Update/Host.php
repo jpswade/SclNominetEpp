@@ -5,7 +5,7 @@ namespace SclNominetEpp\Response\Update;
 use SclNominetEpp\Response;
 
 /**
- * DocBlock: Description of UpdateContact
+ * Response handler for host update operations.
  */
 class Host extends AbstractUpdate
 {

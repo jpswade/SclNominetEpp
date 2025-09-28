@@ -3,13 +3,17 @@
 namespace SclNominetEpp;
 
 /**
- * DocBlock: Description of Address
+ * Address class for handling address information.
  */
 class Address extends \SclContact\Address
 {
-
-
-    public function setLines(array $lines)
+    /**
+     * Set address lines from array.
+     *
+     * @param array $lines The address lines.
+     * @return void
+     */
+    public function setLines(array $lines): void
     {
         if (count($lines) === 3) {
             $this->setLine1($lines[0] . ', ' . $lines[1]);

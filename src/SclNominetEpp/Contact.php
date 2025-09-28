@@ -111,7 +111,8 @@ class Contact extends \SclContact\Contact
     /**
      * Set $id
      *
-     * @param string $id
+     * @param string $id The contact ID.
+     * @return void
      */
     public function setId(string $id)
     {
@@ -131,9 +132,10 @@ class Contact extends \SclContact\Contact
     /**
      * Set $companyNumber
      *
-     * @param string $companyNumber
+     * @param string $companyNumber The company number.
+     * @return void
      */
-    public function setCompanyNumber($companyNumber)
+    public function setCompanyNumber(string $companyNumber)
     {
         $this->companyNumber = (string) $companyNumber;
     }
@@ -151,9 +153,10 @@ class Contact extends \SclContact\Contact
     /**
      * Set $optOut
      *
-     * @param boolean $optOut
+     * @param boolean $optOut Whether to opt out.
+     * @return void
      */
-    public function setOptOut($optOut)
+    public function setOptOut(bool $optOut)
     {
         $this->optOut = $optOut;
     }
@@ -171,9 +174,10 @@ class Contact extends \SclContact\Contact
     /**
      * Set $this->created
      *
-     * @param DateTime $created
+     * @param DateTime $created The creation date.
+     * @return void
      */
-    public function setCreated($created)
+    public function setCreated(DateTime $created)
     {
         $this->created = $created;
     }
@@ -191,9 +195,10 @@ class Contact extends \SclContact\Contact
     /**
      * Set $this->tradeName
      *
-     * @param string $tradeName
+     * @param string $tradeName The trade name.
+     * @return void
      */
-    public function setTradeName($tradeName)
+    public function setTradeName(string $tradeName)
     {
         $this->tradeName = (string) $tradeName;
     }
@@ -234,9 +239,10 @@ class Contact extends \SclContact\Contact
     /**
      * Set $this->type
      *
-     * @param string $type
+     * @param string $type The contact type.
+     * @return void
      */
-    public function setType($type)
+    public function setType(string $type)
     {
         $this->type = (string) $type;
     }
@@ -251,16 +257,32 @@ class Contact extends \SclContact\Contact
         return $this->type;
     }
 
+    /**
+     * Set the client ID.
+     *
+     * @param string $clientID The client ID.
+     * @return void
+     */
     public function setClientID(string $clientID)
     {
         $this->clientID = $clientID;
     }
 
+    /**
+     * Get the client ID.
+     *
+     * @return string The client ID.
+     */
     public function getClientID(): string
     {
         return $this->clientID;
     }
 
+    /**
+     * Convert contact to string representation.
+     *
+     * @return string The string representation.
+     */
     public function __toString(): string
     {
         return (string) $this->getName();

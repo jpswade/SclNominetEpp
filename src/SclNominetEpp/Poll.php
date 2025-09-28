@@ -9,7 +9,6 @@ use DateTime;
  */
 class Poll
 {
-
     /**
      * Number of messages left unacknowledged in the queue.
      *

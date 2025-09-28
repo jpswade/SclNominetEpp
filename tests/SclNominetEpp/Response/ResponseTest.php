@@ -16,12 +16,19 @@ class ResponseTest extends TestCase
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp(): void
     {
         $this->request = new Response();
     }
 
+    /**
+     * Test print response functionality.
+     *
+     * @return void
+     */
     public function testPrintResponse()
     {
         $filename = __DIR__ . '/' . pathinfo(__FILE__, PATHINFO_FILENAME) . '.xml';

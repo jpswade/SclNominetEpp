@@ -6,6 +6,9 @@ use SclNominetEpp\Domain;
 use SclNominetEpp\Nominet;
 use SclNominetEpp\Request\Update\Helper\DomainCompareHelper;
 
+/**
+ * Update request handler for domain updates.
+ */
 class Update
 {
     /**
@@ -23,6 +26,13 @@ class Update
      */
     private Update\Domain $request;
 
+    /**
+     * Invoke the update process.
+     *
+     * @param Domain $domain        The domain to update.
+     * @param Domain $currentDomain The current domain state.
+     * @return Update\Domain The update request object.
+     */
     public function __invoke(Domain $domain, Domain $currentDomain): Update\Domain
     {
         $this->domain = $domain;
@@ -35,6 +45,11 @@ class Update
         return $this->request;
     }
 
+    /**
+     * Handle nameserver updates.
+     *
+     * @return void
+     */
     protected function nameservers(): void
     {
         $currentNameservers = $this->currentDomain->getNameservers();
@@ -60,6 +75,11 @@ class Update
         }
     }
 
+    /**
+     * Handle contact updates.
+     *
+     * @return void
+     */
     protected function contacts(): void
     {
         $currentContacts = $this->currentDomain->getContacts();
@@ -81,6 +101,11 @@ class Update
         }
     }
 
+    /**
+     * Handle extension updates.
+     *
+     * @return void
+     */
     protected function extension(): void
     {
         if (
@@ -119,6 +144,13 @@ class Update
         }
     }
 
+    /**
+     * Get the intersection of two arrays.
+     *
+     * @param array $current The current array.
+     * @param array $new     The new array.
+     * @return array The intersection array.
+     */
     protected function getIntersect(array $current, array $new): array
     {
         return array_udiff(

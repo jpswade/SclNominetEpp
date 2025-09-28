@@ -15,6 +15,11 @@ class Domain extends AbstractInfo
     const TYPE = 'domain';
     const VALUE_NAME = 'name';
 
+    /**
+     * Constructor for Domain info response.
+     *
+     * @return void
+     */
     public function __construct()
     {
         parent::__construct(
@@ -24,11 +29,22 @@ class Domain extends AbstractInfo
         );
     }
 
+    /**
+     * Get the domain object.
+     *
+     * @return DomainObject|null The domain object or null.
+     */
     public function getDomain(): ?DomainObject
     {
         return $this->object;
     }
 
+    /**
+     * Add information data to the domain object.
+     *
+     * @param SimpleXMLElement $infData The information data element.
+     * @return void
+     */
     protected function addInfData(SimpleXMLElement $infData)
     {
 
@@ -46,6 +62,12 @@ class Domain extends AbstractInfo
         $this->object->setUpID($infData->upID);
     }
 
+    /**
+     * Add extension data to the domain object.
+     *
+     * @param SimpleXMLElement|null $extension The extension data element.
+     * @return void
+     */
     protected function addExtensionData(SimpleXMLElement $extension = null)
     {
                 //EXTENSION DATA
@@ -56,8 +78,14 @@ class Domain extends AbstractInfo
         $this->object->setNextBill($extension->{'next-bill'});
     }
 
-    protected function setValue(SimpleXMLElement $name)
+    /**
+     * Set the domain name value.
+     *
+     * @param SimpleXMLElement $infData The name element.
+     * @return void
+     */
+    protected function setValue(SimpleXMLElement $infData)
     {
-        $this->object->setName((string)$name);
+        $this->object->setName((string)$infData);
     }
 }

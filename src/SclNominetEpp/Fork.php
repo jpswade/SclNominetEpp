@@ -2,6 +2,8 @@
 
 namespace SclNominetEpp;
 
+use DateTime;
+
 /**
  * This class is the fork object for the fork command response data
  */
@@ -9,51 +11,30 @@ class Fork
 {
     /**
      * New contact identifier.
-     *
-     * @var string
      */
-    protected $contactId;
+    protected string $contactId;
 
     /**
      * The Date of contact creation.
-     *
-     * @var DateTime
      */
-    protected $createDate;
+    protected DateTime $createDate;
 
-
-    /**
-     *
-     * @return string
-     */
-    public function getContactId()
+    public function getContactId(): string
     {
         return $this->contactId;
     }
 
-    /**
-     *
-     * @param string $contactId
-     */
-    public function setContactId($contactId)
+    public function setContactId(string $contactId)
     {
         $this->contactId = $contactId;
     }
 
-    /**
-     *
-     * @return DateTime
-     */
-    public function getCreateDate()
+    public function getCreateDate(): DateTime
     {
         return $this->createDate;
     }
 
-    /**
-     *
-     * @param DateTime $createDate
-     */
-    public function setCreateDate($createDate)
+    public function setCreateDate(DateTime $createDate)
     {
         $this->createDate = $createDate;
     }

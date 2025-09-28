@@ -34,16 +34,19 @@ class Contact extends AbstractInfo
     /**
      * Set Contact to the passed ContactObject file.
      *
-     * @param ContactObject $contact
+     * @param ContactObject $object
      */
     public function setContact(ContactObject $object)
     {
         $this->object = $object;
     }
 
-    public function lookup(string $contactID)
+    public function lookup(string $contactID): self
     {
-        // @todo
+        $contact = new ContactObject();
+        $contact->setId($contactID);
+        $this->setContact($contact);
+        return $this;
     }
 
     protected function getName()

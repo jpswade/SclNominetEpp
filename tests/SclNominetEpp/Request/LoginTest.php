@@ -18,12 +18,19 @@ class LoginTest extends TestCase
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @return void
      */
     protected function setUp(): void
     {
         $this->request = new Login();
     }
 
+    /**
+     * Test login functionality.
+     *
+     * @return void
+     */
     public function testLogin()
     {
         $this->request->setCredentials('TAG', 'PASSWORD');

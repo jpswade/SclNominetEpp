@@ -30,8 +30,14 @@ class Host extends AbstractCheck
         );
     }
 
+    /**
+     * Set the host values to check.
+     *
+     * @param array $hosts The hosts to check.
+     * @return void
+     */
     public function setValues(array $hosts)
     {
-        // @todo
+        $this->lookup($hosts);
     }
 }

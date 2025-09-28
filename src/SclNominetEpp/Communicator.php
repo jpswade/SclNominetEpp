@@ -6,6 +6,7 @@
 
 namespace SclNominetEpp;
 
+use SclRequestResponse\Exception\ConnectionFailedException;
 use SclSocket\SocketInterface;
 use SclRequestResponse\Communicator\PersistentCommunicator;
 
@@ -20,7 +21,7 @@ class Communicator extends PersistentCommunicator
      *
      * @var array
      */
-    public static $config = [
+    public static array $config = [
         'live' => [
             'secure' => [
                 'host' => 'epp.nominet.org.uk',
@@ -46,7 +47,8 @@ class Communicator extends PersistentCommunicator
     /**
      * Constructor
      *
-     * @param SocketInterface $socket
+     * @param SocketInterface $socket The socket interface.
+     * @return void
      */
     public function __construct(SocketInterface $socket)
     {
@@ -56,12 +58,13 @@ class Communicator extends PersistentCommunicator
     /**
      * Connect to the server.
      *
-     * @param boolean $live
-     * @param boolean $secure
+     * @param boolean $live   Whether to use live or test environment.
+     * @param boolean $secure Whether to use secure connection.
      *
      * @return void
+     * @throws ConnectionFailedException When connection setup fails.
      */
-    public function setupConnection($live = false, $secure = true)
+    public function setupConnection(bool $live = false, bool $secure = true): void
     {
         $liveIndex = $live ? 'live' : 'test';
         $secureIndex = $secure ? 'secure' : 'insecure';
@@ -70,7 +73,9 @@ class Communicator extends PersistentCommunicator
 
         $this->connect($config['host'], $config['port'], $secure);
 
-        // TODO Parse and verify the greeting.
-        $this->read();
+        $response = $this->read();
+        if (empty($response)) {
+            throw new ConnectionFailedException('No greeting received from server.');
+        }
     }
 }

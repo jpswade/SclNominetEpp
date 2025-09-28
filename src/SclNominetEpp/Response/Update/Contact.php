@@ -5,7 +5,7 @@ namespace SclNominetEpp\Response\Update;
 use SclNominetEpp\Response;
 
 /**
- * DocBlock: Description of UpdateContact
+ * Response handler for contact update operations.
  */
 class Contact extends AbstractUpdate
 {

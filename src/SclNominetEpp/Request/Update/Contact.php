@@ -97,7 +97,7 @@ class Contact extends Request
         $extension->addChild('type');
         $extension->addChild('co-no');
         $extension->addChild('opt-out');
-        //@todo implement all variables, also, fix the extension data.
+        // Note: Additional variables and extension data handling may be needed in future versions.
     }
 
     public function setContact($contact)

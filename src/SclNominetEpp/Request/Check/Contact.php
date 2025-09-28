@@ -30,8 +30,14 @@ class Contact extends AbstractCheck
         );
     }
 
+    /**
+     * Set the contact IDs to check.
+     *
+     * @param array $contactIds The contact IDs to check.
+     * @return void
+     */
     public function setValues(array $contactIds)
     {
-        // @todo
+        $this->lookup($contactIds);
     }
 }

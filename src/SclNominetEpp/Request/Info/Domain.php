@@ -17,10 +17,8 @@ class Domain extends AbstractInfo
 
     /**
      * The object.
-     *
-     * @var DomainObject
      */
-    protected $object = null;
+    protected ?object $object = null;
 
     /**
      * Constructor
@@ -35,11 +33,7 @@ class Domain extends AbstractInfo
         );
     }
 
-    /**
-     * @param string $domainName
-     * @return Domain
-     */
-    public function lookup($domainName)
+    public function lookup(string $domainName): Domain
     {
         $domain = new DomainObject();
         $domain->setName($domainName);
@@ -52,7 +46,7 @@ class Domain extends AbstractInfo
      *
      * @param SimpleXMLElement $action
      */
-    protected function addContent(\SimpleXMLElement $action)
+    protected function addContent(\SimpleXMLElement $action): void
     {
         $info = $action->addChild("{$this->type}:info", '', $this->infoNamespace);
 

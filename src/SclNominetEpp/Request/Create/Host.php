@@ -33,7 +33,8 @@ class Host extends AbstractCreate
      * This function is used to add Object specific content
      * to the Abstract class' implementation of addContent
      *
-     * @param SimpleXMLElement $create
+     * @param SimpleXMLElement $create The XML element to add content to.
+     * @return void
      */
     protected function addSpecificContent(SimpleXMLElement $create)
     {
@@ -50,7 +51,9 @@ class Host extends AbstractCreate
     /**
      * An Exception is thrown if the object is not of type \SclNominetEpp\Contact
      *
-     * @throws InvalidArgumentException
+     * @param Nameserver $object The object to validate.
+     * @return boolean True if validation passes.
+     * @throws InvalidArgumentException When object is not a valid nameserver.
      */
     public function objectValidate($object): bool
     {
@@ -61,12 +64,23 @@ class Host extends AbstractCreate
         return true;
     }
 
+    /**
+     * Set the nameserver object.
+     *
+     * @param Nameserver $object The nameserver object to set.
+     * @return void
+     */
     public function setNameserver(Nameserver $object)
     {
         $this->object = $object;
     }
 
 
+    /**
+     * Get the name of the nameserver.
+     *
+     * @return string The host name.
+     */
     protected function getName(): string
     {
         return $this->object->getHostName();

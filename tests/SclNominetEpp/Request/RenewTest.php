@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 
 class RenewTest extends TestCase
 {
-
     public function testRequestException()
     {
         $object = new Renew('example.org.uk');

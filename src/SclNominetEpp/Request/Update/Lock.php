@@ -31,12 +31,12 @@ class Lock extends Request
     /**
      * Contact Id.
      */
-    protected string $contactId;
+    protected ?string $contactId = null;
 
     /**
      * Domain Name.
      */
-    protected string $domainName;
+    protected ?string $domainName = null;
 
     /**
      * Either a "contact" or a "domain".
@@ -52,8 +52,8 @@ class Lock extends Request
      * Initialises the object string, and type string.
      * Feeds the expected response to the request class.
      *
-     * @param string $object
-     * @param string $type
+     * @param string      $object
+     * @param string      $type
      * @param object|null $response
      */
     public function __construct(string $object, string $type, ?object $response = null)

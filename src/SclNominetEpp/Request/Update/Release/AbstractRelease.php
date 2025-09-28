@@ -3,6 +3,7 @@
 namespace SclNominetEpp\Request\Update\Release;
 
 use SclNominetEpp\Request;
+use SclRequestResponse\ResponseInterface;
 use SimpleXMLElement;
 
 /**
@@ -43,10 +44,14 @@ abstract class AbstractRelease extends Request
      * @param string                $type            The type of release operation.
      * @param string                $updateNamespace The namespace for the update operation.
      * @param string                $valueName       The name of the value being updated.
-     * @param SimpleXMLElement|null $response        The response object.
+     * @param ResponseInterface|null $response        The response object.
      */
-    public function __construct(string $type, string $updateNamespace, string $valueName, $response = null)
-    {
+    public function __construct(
+        string $type,
+        string $updateNamespace,
+        string $valueName,
+        ?ResponseInterface $response = null
+    ) {
         parent::__construct('update', $response);
         $this->type  = $type;
         $this->updateNamespace = $updateNamespace;
@@ -59,7 +64,7 @@ abstract class AbstractRelease extends Request
      * @param string $value The value to set.
      * @return static
      */
-    public function lookup(string $value)
+    public function lookup(string $value): AbstractRelease
     {
         $this->value = $value;
 
@@ -78,12 +83,22 @@ abstract class AbstractRelease extends Request
     }
 
     /**
+     * Get the registrar tag.
+     *
+     * @return string The registrar tag.
+     */
+    public function getRegistrarTag(): string
+    {
+        return $this->registrarTag;
+    }
+
+    /**
      * Add content to the request form.
      *
      * @param SimpleXMLElement $action The XML action element.
      * @return void
      */
-    public function addContent(SimpleXMLElement $action)
+    public function addContent(SimpleXMLElement $action): void
     {
         $releaseNS  = $this->updateNamespace;
 
