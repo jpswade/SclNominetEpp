@@ -15,21 +15,6 @@ class Greeting extends Response
 {
     protected GreetingObject $greetingObject;
 
-    /**
-     * @throws \Exception
-     */
-    public function init($data)
-    {
-        $data = new SimpleXMLElement($data);
-
-        // TODO verify all these element exist
-
-        $this->processData($data);
-
-        // TODO save transactions
-        return $this;
-    }
-
     protected function processData(SimpleXMLElement $xml)
     {
         if (!$this->xmlValid($xml)) {
