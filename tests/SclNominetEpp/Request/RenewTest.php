@@ -17,7 +17,7 @@ class RenewTest extends TestCase
     public function testRequestXML()
     {
         $object = new Renew('example.co.uk');
-        $object->setDate(new DateTime('2009-04-07'));
+        $object->setDate(new DateTime('2009-04-07'))->setPeriod(2);
         $filename = __DIR__ . '/' . pathinfo(__FILE__, PATHINFO_FILENAME) . '.xml';
         $xml = file_get_contents($filename);
         $this->assertEquals($xml, $object->getPacket());

@@ -6,6 +6,7 @@
 
 namespace SclNominetEpp\Request;
 
+use DateTimeInterface;
 use SclNominetEpp\Request;
 use SclNominetEpp\Response\Renew as RenewResponse;
 use SimpleXMLElement;
@@ -15,14 +16,14 @@ use SimpleXMLElement;
  */
 class Renew extends Request
 {
-    /** @const int Default renewal period, two years (depending on unit). */
-    const DEFAULT_PERIOD = 2;
+    /** @const int Default renewal period. */
+    protected const DEFAULT_PERIOD = 1;
 
     /** @const int Default renewal unit, years. */
-    const DEFAULT_UNIT = 'y';
+    protected const DEFAULT_UNIT = 'y';
 
     /** @var string Format of the atomic type 'xs:date', eg: 2009-04-07 */
-    const CURRENT_EXPIRY_DATE_FORMAT = 'Y-m-d';
+    protected const CURRENT_EXPIRY_DATE_FORMAT = 'Y-m-d';
 
     /**
      * The domain name.
@@ -32,7 +33,7 @@ class Renew extends Request
     /**
      * The expiry date.
      */
-    protected ?\DateTimeInterface $currentExpiryDate = null;
+    protected ?DateTimeInterface $currentExpiryDate = null;
 
     /**
      * The period to register for.
@@ -46,9 +47,8 @@ class Renew extends Request
 
     /**
      * Tells the parent class what the action of this request is.
-     * @param string|null $domain
      */
-    public function __construct(string $domain = null)
+    public function __construct(?string $domain = null)
     {
         parent::__construct('renew', new RenewResponse());
         if ($domain) {
@@ -58,12 +58,8 @@ class Renew extends Request
 
     /**
      * Set the domain
-     *
-     * @param string                  $domain
-     * @param \DateTimeInterface|null $currentExpiryDate
-     * @return \SclNominetEpp\Request\Renew
      */
-    public function setDomain(string $domain, \DateTimeInterface $currentExpiryDate = null)
+    public function setDomain(string $domain, ?DateTimeInterface $currentExpiryDate = null): Renew
     {
         $this->domain = $domain;
 
@@ -76,11 +72,8 @@ class Renew extends Request
 
     /**
      * Set the date
-     *
-     * @param \DateTimeInterface $currentExpiryDate
-     * @return \SclNominetEpp\Request\Renew
      */
-    public function setDate(\DateTimeInterface $currentExpiryDate)
+    public function setDate(?DateTimeInterface $currentExpiryDate = null): Renew
     {
         $this->currentExpiryDate = $currentExpiryDate;
         return $this;
@@ -88,33 +81,26 @@ class Renew extends Request
 
     /**
      * Set the period
-     *
-     * @param integer $period
-     * @return \SclNominetEpp\Request\Renew
      */
-    public function setPeriod(int $period)
+    public function setPeriod(int $period, ?string $unit = null): Renew
     {
         $this->period = $period;
+        if ($unit) {
+            $this->setUnit($unit);
+        }
         return $this;
     }
 
     /**
      * Set the unit
-     *
-     * @param string $unit
-     * @return \SclNominetEpp\Request\Renew
      */
-    public function setUnit(string $unit)
+    public function setUnit(string $unit): Renew
     {
         $this->unit = $unit;
         return $this;
     }
 
-    /**
-     * @param string $format
-     * @return string
-     */
-    public function getCurrentExpiryDate($format = self::CURRENT_EXPIRY_DATE_FORMAT): string
+    public function getCurrentExpiryDate(string $format = self::CURRENT_EXPIRY_DATE_FORMAT): string
     {
         if ($this->currentExpiryDate === null) {
             throw new \InvalidArgumentException('Current Expiry Date is required.');
@@ -122,12 +108,6 @@ class Renew extends Request
         return $this->currentExpiryDate->format($format);
     }
 
-    /**
-     * (non-PHPdoc)
-     * @param SimpleXMLElement $action
-     * @see Request.AbstractRequest::addContent()
-     *
-     */
     protected function addContent(SimpleXMLElement $action)
     {
         $domainNS = 'urn:ietf:params:xml:ns:domain-1.0';
