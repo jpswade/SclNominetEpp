@@ -3,6 +3,7 @@
 namespace SclNominetEpp\Response;
 
 use DateTime;
+use DOMDocument;
 use SclNominetEpp\Response;
 use SclRequestResponse\Exception\InvalidResponsePacketException;
 use SclRequestResponse\ResponseInterface;
@@ -43,7 +44,7 @@ class Greeting extends Response
         if (empty($xml->greeting)) {
             return false;
         }
-        $dom = new \DOMDocument();
+        $dom = new DOMDocument();
         $domDocument = $dom->loadXML($xml->asXML());
         return (bool)$domDocument;
     }

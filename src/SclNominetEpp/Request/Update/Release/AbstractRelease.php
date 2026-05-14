@@ -17,11 +17,6 @@ abstract class AbstractRelease extends Request
     protected string $value = '';
 
     /**
-     * The type of check this is.
-     */
-    private string $type;
-
-    /**
      * The namespace of update.
      */
     private string $updateNamespace;
@@ -41,19 +36,16 @@ abstract class AbstractRelease extends Request
     /**
      * Constructor
      *
-     * @param string                $type            The type of release operation.
      * @param string                $updateNamespace The namespace for the update operation.
      * @param string                $valueName       The name of the value being updated.
      * @param ResponseInterface|null $response        The response object.
      */
     public function __construct(
-        string $type,
         string $updateNamespace,
         string $valueName,
         ?ResponseInterface $response = null
     ) {
         parent::__construct('update', $response);
-        $this->type  = $type;
         $this->updateNamespace = $updateNamespace;
         $this->valueName = $valueName;
     }

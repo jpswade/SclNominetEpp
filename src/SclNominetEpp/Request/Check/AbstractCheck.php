@@ -57,11 +57,7 @@ abstract class AbstractCheck extends Request
      */
     public function lookup($values): AbstractCheck
     {
-        if (is_array($values)) {
-            $this->values = $values;
-        } else {
-            $this->values = [$values];
-        }
+        $this->values = is_array($values) ? $values : [$values];
 
         return $this;
     }

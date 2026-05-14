@@ -13,17 +13,13 @@ class Fork extends Response
 {
     /**
      * New contact identifier.
-     *
-     * @var string
      */
-    protected $contactId;
+    protected string $contactId = '';
 
     /**
-     * The Date of contact creation.
-     *
-     * @var DateTime
+     * The date of contact creation.
      */
-    protected $createDate;
+    protected ?DateTime $createDate = null;
 
     /**
      * Process the XML data for fork response.
@@ -42,7 +38,18 @@ class Fork extends Response
         $ns = $xml->getNamespaces(true);
 
         $contactDetails = $xml->response->resData->children($ns['contact'])->creData;
-        $this->contactId = $contactDetails->id;
-        $this->createDate = $contactDetails->crDate;
+        $this->contactId = (string) $contactDetails->id;
+        $crDate = (string) $contactDetails->crDate;
+        $this->createDate = $crDate !== '' ? new DateTime($crDate) : null;
+    }
+
+    public function getContactId(): string
+    {
+        return $this->contactId;
+    }
+
+    public function getCreateDate(): ?DateTime
+    {
+        return $this->createDate;
     }
 }

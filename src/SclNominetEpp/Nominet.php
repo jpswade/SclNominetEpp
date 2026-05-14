@@ -12,6 +12,7 @@ use Exception;
 use SclNominetEpp\Exception\LoginRequiredException;
 use SclNominetEpp\Request\Update;
 use SclNominetEpp\Request\Update\Unrenew;
+use SclNominetEpp\Response\Greeting as GreetingResponse;
 use SclNominetEpp\Response\ListDomains;
 use SclRequestResponse\ResponseInterface;
 
@@ -113,7 +114,7 @@ class Nominet extends AbstractRequestResponse
         }
         $this->loggedIn = true;
 
-        return $response::SUCCESS_STANDARD === $response->code();
+        return Response::SUCCESS_STANDARD === $response->code();
     }
 
     /**
@@ -128,7 +129,7 @@ class Nominet extends AbstractRequestResponse
     {
         $this->loginCheck();
 
-        $request = new Request\Hello('hello', new \SclNominetEpp\Response\Greeting());
+        $request = new Request\Hello('hello', new GreetingResponse());
 
         return $this->processRequest($request);
     }
@@ -149,7 +150,7 @@ class Nominet extends AbstractRequestResponse
         $response = $this->processRequest($request);
 
         $this->loggedIn = false;
-        return $response::SUCCESS_ENDING_SESSION === $response->code();
+        return Response::SUCCESS_ENDING_SESSION === $response->code();
     }
 
     /**
@@ -171,6 +172,7 @@ class Nominet extends AbstractRequestResponse
 
         $request->lookup($domains);
 
+        /** @var Response\Check\Domain $response */
         $response = $this->processRequest($request);
 
         return $response->getValues();
@@ -446,10 +448,10 @@ class Nominet extends AbstractRequestResponse
      * an object. ($contactID is the $registrant from domainInfo)
      *
      * @param string $contactID The contact ID to query.
-     * @return boolean True if contact was found.
+     * @return Contact|false The contact when found, false when the info command did not succeed.
      * @throws LoginRequiredException When not logged in.
      */
-    public function contactInfo(string $contactID): bool
+    public function contactInfo(string $contactID)
     {
         $this->loginCheck();
 
@@ -457,6 +459,7 @@ class Nominet extends AbstractRequestResponse
 
         $request->lookup($contactID);
 
+        /** @var Response\Info\Contact $response */
         $response = $this->processRequest($request);
         if (!$response->success()) {
             return false;
@@ -480,6 +483,7 @@ class Nominet extends AbstractRequestResponse
 
         $request->lookup($hostName);
 
+        /** @var Response\Info\Host $response */
         $response = $this->processRequest($request);
         return $response->getHost();
     }
@@ -526,16 +530,17 @@ class Nominet extends AbstractRequestResponse
     /**
      * The <release> operation allows a registrar to move a domain name, or
      * account onto another tag.
-     * @param string $id The contact ID to release.
+     * @param string $contactId The contact ID to release.
      * @return Contact|null The released contact.
      * @throws LoginRequiredException When not logged in.
      */
-    public function releaseContact(string $id)
+    public function releaseContact(string $contactId)
     {
         $this->loginCheck();
 
         $request = new Request\Update\Release\Contact();
-        $request->lookup($id);
+        $request->lookup($contactId);
+        /** @var Response\Update\Contact $response */
         $response = $this->processRequest($request);
         return $response->getContact();
     }
@@ -553,6 +558,7 @@ class Nominet extends AbstractRequestResponse
 
         $request = new Request\Update\Release\Domain();
         $request->lookup($name);
+        /** @var Response\Update\Domain $response */
         $response = $this->processRequest($request);
         return $response->getDomain();
     }
@@ -561,7 +567,7 @@ class Nominet extends AbstractRequestResponse
      * The <fork> command allows a number of domain names on a registrant contact
      * to be moved to a copy of that contact.
      * @param string $hostName The host name to fork.
-     * @return mixed The forked host.
+     * @return string New contact identifier from the fork response.
      * @throws LoginRequiredException When not logged in.
      */
     public function fork(string $hostName)
@@ -572,8 +578,10 @@ class Nominet extends AbstractRequestResponse
 
         $request->setValue($hostName);
 
+        /** @var Response\Update\Fork $response */
         $response = $this->processRequest($request);
-        return $response->getHost();
+
+        return $response->getContactId();
     }
 
     /**
@@ -598,6 +606,7 @@ class Nominet extends AbstractRequestResponse
         $request = new Request\ListDomains();
         $request->setDate($month, $year);
 
+        /** @var ListDomains $response */
         $response = $this->processRequest($request);
 
         return $response->getDomains();

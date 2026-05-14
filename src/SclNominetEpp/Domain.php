@@ -13,7 +13,8 @@ class Domain
     const BILL_REGISTRAR = 'th';
     const BILL_CUSTOMER = 'bc';
     const BILLS = [self::BILL_REGISTRAR, self::BILL_CUSTOMER];
-    const REGISTRATION_PERIOD = 2;
+    const MIN_REGISTRATION_PERIOD = 1;
+    const MAX_REGISTRATION_PERIOD = 10;
 
     /**
      * Domain name
@@ -23,7 +24,7 @@ class Domain
     /**
      * Registration Period
      */
-    private int $period = self::REGISTRATION_PERIOD;
+    private int $period = self::MIN_REGISTRATION_PERIOD;
 
     /**
      * The Person, Company or Entity who owns or holds a domain name.
@@ -251,8 +252,13 @@ class Domain
      */
     public function setPeriod(int $period): Domain
     {
-        if ($period < self::REGISTRATION_PERIOD) {
-            $message = sprintf("Invalid period %d, must be greater than %d", $period, self::REGISTRATION_PERIOD);
+        if ($period < self::MIN_REGISTRATION_PERIOD || $period > self::MAX_REGISTRATION_PERIOD) {
+            $message = sprintf(
+                'Invalid period %d, must be between %d and %d years inclusive',
+                $period,
+                self::MIN_REGISTRATION_PERIOD,
+                self::MAX_REGISTRATION_PERIOD
+            );
             throw new InvalidArgumentException($message);
         }
         $this->period = $period;

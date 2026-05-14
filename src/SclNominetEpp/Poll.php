@@ -17,11 +17,11 @@ class Poll
     protected $count;
 
     /**
-     * Poll Identifier
+     * Poll message identifier from the queue.
      *
      * @var string
      */
-    protected $id;
+    protected $queueMessageId;
 
     /**
      * Date of the message in the Queue.
@@ -53,15 +53,15 @@ class Poll
 
     public function getId()
     {
-        return $this->id;
+        return $this->queueMessageId;
     }
 
     /**
-     * @param string $id
+     * @param string $queueMessageId
      */
-    public function setId(string $id): void
+    public function setId(string $queueMessageId): void
     {
-        $this->id = $id;
+        $this->queueMessageId = $queueMessageId;
     }
 
     public function getQueueDate()

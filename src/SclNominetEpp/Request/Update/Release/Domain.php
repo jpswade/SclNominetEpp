@@ -2,6 +2,8 @@
 
 namespace SclNominetEpp\Request\Update\Release;
 
+use SclNominetEpp\Response\Update\Domain as DomainReleaseResponse;
+
 /**
  * This class build the XML for a Nominet EPP r:release command.
  */
@@ -17,10 +19,9 @@ class Domain extends AbstractRelease
     public function __construct()
     {
         parent::__construct(
-            self::TYPE,
             self::UPDATE_NAMESPACE,
             self::VALUE_NAME,
-            new Domain()
+            new DomainReleaseResponse()
         );
     }
 }

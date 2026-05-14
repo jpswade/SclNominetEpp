@@ -39,7 +39,7 @@ class Domain extends AbstractCreate
      */
     protected function addSpecificContent(SimpleXMLElement $create)
     {
-        $period = $create->addChild('period', 2);
+        $period = $create->addChild('period', (string) $this->object->getPeriod());
         $period->addAttribute('unit', 'y');
 
         $ns = $create->addChild('ns');

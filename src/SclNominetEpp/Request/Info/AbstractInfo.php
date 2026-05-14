@@ -59,4 +59,6 @@ abstract class AbstractInfo extends Request
 
         $info->addChild($this->valueName, $this->getName(), $this->infoNamespace);
     }
+
+    abstract protected function getName(): string;
 }

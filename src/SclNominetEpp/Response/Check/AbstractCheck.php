@@ -50,7 +50,7 @@ abstract class AbstractCheck extends Response
     /**
      * {@inheritDoc}
      *
-     * @param SimpleXMLElement $data
+     * @param SimpleXMLElement $xml
      * @return void
      */
     protected function processData(SimpleXMLElement $xml)

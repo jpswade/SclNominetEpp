@@ -2,6 +2,7 @@
 
 namespace SclNominetEpp\Request\Info;
 
+use LogicException;
 use SclNominetEpp\Nameserver;
 use SclNominetEpp\Response\Info\Host as HostInfoResponse;
 
@@ -13,7 +14,8 @@ class Host extends AbstractInfo
     const TYPE = 'host';
     const INFO_NAMESPACE = "urn:ietf:params:xml:ns:host-1.0";
     const VALUE_NAME = "name";
-    private Nameserver $nameserver;
+
+    private ?Nameserver $nameserver = null;
 
     /**
      * Constructor
@@ -45,8 +47,12 @@ class Host extends AbstractInfo
         return $this;
     }
 
-    protected function getName()
+    protected function getName(): string
     {
-        return $this->object->getHostName();
+        if ($this->nameserver === null) {
+            throw new LogicException('Call lookup() or setNameserver() before building the host:info request.');
+        }
+
+        return $this->nameserver->getHostName();
     }
 }

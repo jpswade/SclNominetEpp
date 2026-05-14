@@ -41,21 +41,21 @@ class Request implements RequestInterface
     {
         $this->action = $action;
 
-        if ($response instanceof ResponseInterface) {
-            $this->response = $response;
-        } else {
-            $this->response = new Response();
-        }
+        $this->response = $response instanceof ResponseInterface
+            ? $response
+            : new Response();
 
         $this->xml = new SimpleXMLElement('<epp />');
     }
 
     /**
      * This method should be over to provide the content of the request.
+     *
+     * @param SimpleXMLElement $action Command element; unused in this default implementation.
      */
     protected function addContent(SimpleXMLElement $action)
     {
-        // Nothing happens here
+        // Intentionally empty; subclasses override.
     }
 
     /**

@@ -124,7 +124,9 @@ class Response implements ResponseInterface
         $this->data = $data;
 
         if (!$this->isErrorCode($this->code) && !$this->isSuccessCode($this->code)) {
-            RuntimeException::unexpectedResultCode($this->code, $this->message);
+            throw new RuntimeException(
+                'Unexpected result code: ' . $this->code . ', message: ' . $this->message
+            );
         }
 
         $this->processData($data);
@@ -144,10 +146,12 @@ class Response implements ResponseInterface
 
     /**
      * Custom processing of the XML response.
+     *
+     * @param SimpleXMLElement $xml Parsed response; unused in this default implementation.
      */
     protected function processData(SimpleXMLElement $xml)
     {
-        // Do nothing.
+        // Intentionally empty; subclasses override.
     }
 
     /**

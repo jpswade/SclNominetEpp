@@ -64,7 +64,7 @@ class Domain extends AbstractInfo
         $this->object = $object;
     }
 
-    protected function getName()
+    protected function getName(): string
     {
         return $this->object->getName();
     }

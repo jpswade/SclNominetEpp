@@ -65,10 +65,11 @@ abstract class AbstractCreate extends Response
      * @todo may be worth refactoring the create response to have this (as abstract)
      * instead of overwriting the parent class.
      *
-     * @param SimpleXMLElement $xml
+     * @param SimpleXMLElement $xml Extension payload; unused in this default implementation.
      */
     protected function addSpecificData(SimpleXMLElement $xml)
     {
+        // Intentionally empty; subclasses override.
     }
 
     /**

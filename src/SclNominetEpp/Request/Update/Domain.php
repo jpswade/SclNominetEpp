@@ -101,14 +101,14 @@ class Domain extends Request
             $addBlock = $update->addChild('add', '', $domainNS);
             $addNameServers = null;
             foreach ($this->add as $field) {
+                $targetBlock = $addBlock;
                 if ($field instanceof Request\Update\Field\DomainNameserver) {
                     if ($addNameServers === null) {
                         $addNameServers = $addBlock->addChild('ns', '');
                     }
-                    $field->fieldXml($addNameServers);
-                } else {
-                    $field->fieldXml($addBlock);
+                    $targetBlock = $addNameServers;
                 }
+                $field->fieldXml($targetBlock);
             }
         }
 
@@ -117,14 +117,14 @@ class Domain extends Request
 
             $remNameServers = null;
             foreach ($this->remove as $field) {
+                $targetBlock = $remBlock;
                 if ($field instanceof Request\Update\Field\DomainNameserver) {
                     if ($remNameServers === null) {
                         $remNameServers = $remBlock->addChild('ns', '');
                     }
-                    $field->fieldXml($remNameServers);
-                } else {
-                    $field->fieldXml($remBlock);
+                    $targetBlock = $remNameServers;
                 }
+                $field->fieldXml($targetBlock);
             }
         }
 
@@ -148,10 +148,10 @@ class Domain extends Request
             );
 
             if ($this->autoBill !== null) {
-                $extension->addChild('auto-bill', $this->autoBill);
+                $extension->addChild('auto-bill', (string) $this->autoBill);
             }
             if ($this->nextBill !== null) {
-                $extension->addChild('next-bill', $this->nextBill);
+                $extension->addChild('next-bill', (string) $this->nextBill);
             }
             foreach ($this->notes as $note) {
                 $extension->addChild('notes', $note);

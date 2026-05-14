@@ -28,7 +28,7 @@ class Host extends AbstractCreate
     /**
      * Overriding setter of AbstractCreate Response
      *
-     * @param string $name
+     * @param string $hostName
      */
     protected function setIdentifier($hostName)
     {

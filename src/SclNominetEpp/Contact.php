@@ -3,6 +3,7 @@
 namespace SclNominetEpp;
 
 use DateTime;
+use InvalidArgumentException;
 use SclNominetEpp\Traits\UpDateTrait;
 
 /**
@@ -69,12 +70,6 @@ class Contact extends \SclContact\Contact
      * The registered company number or the DfES UK school number of the registrant.
      */
     private string $companyNumber;
-
-    /**
-     * The name of the organisation associated with the contact.
-     * @todo rename all instances of organisation to company.
-     */
-    private string $organisationName;
 
     /**
      * The optOut is used to prevent the registrant's address details
@@ -163,10 +158,8 @@ class Contact extends \SclContact\Contact
 
     /**
      * Get $optOut
-     *
-     * @return string
      */
-    public function getOptOut()
+    public function getOptOut(): bool
     {
         return $this->optOut;
     }
@@ -221,7 +214,7 @@ class Contact extends \SclContact\Contact
     public function setCompanyType(string $companyType)
     {
         if (!in_array($companyType, self::$companyTypes)) {
-            throw new \InvalidArgumentException("Invalid organisation type: $companyType");
+            throw new InvalidArgumentException("Invalid organisation type: $companyType");
         }
         $this->companyType = (string) $companyType;
     }

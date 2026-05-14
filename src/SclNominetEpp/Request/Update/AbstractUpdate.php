@@ -40,6 +40,16 @@ abstract class AbstractUpdate extends Request
     protected string $value;
 
     /**
+     * @var list<UpdateFieldInterface>
+     */
+    protected array $add = [];
+
+    /**
+     * @var list<UpdateFieldInterface>
+     */
+    protected array $remove = [];
+
+    /**
      * Constructor for AbstractUpdate.
      *
      * @param string        $type            The type of update operation.

@@ -7,6 +7,7 @@
 namespace SclNominetEpp\Request;
 
 use DateTimeInterface;
+use InvalidArgumentException;
 use SclNominetEpp\Request;
 use SclNominetEpp\Response\Renew as RenewResponse;
 use SimpleXMLElement;
@@ -103,7 +104,7 @@ class Renew extends Request
     public function getCurrentExpiryDate(string $format = self::CURRENT_EXPIRY_DATE_FORMAT): string
     {
         if ($this->currentExpiryDate === null) {
-            throw new \InvalidArgumentException('Current Expiry Date is required.');
+            throw new InvalidArgumentException('Current Expiry Date is required.');
         }
         return $this->currentExpiryDate->format($format);
     }
@@ -117,7 +118,7 @@ class Renew extends Request
         $domainRenew->addAttribute('xsi:schemaLocation', $domainXSI, self::XSI_NAMESPACE);
         $domainRenew->addChild('name', $this->domain);
         $domainRenew->addChild('curExpDate', $this->getCurrentExpiryDate());
-        $period = $domainRenew->addChild('period', $this->period);
+        $period = $domainRenew->addChild('period', (string) $this->period);
         $period->addAttribute('unit', $this->unit);
     }
 }

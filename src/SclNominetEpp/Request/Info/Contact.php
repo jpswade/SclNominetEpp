@@ -49,8 +49,8 @@ class Contact extends AbstractInfo
         return $this;
     }
 
-    protected function getName()
+    protected function getName(): string
     {
-        return $this->object->getId();
+        return (string) $this->object->getId();
     }
 }

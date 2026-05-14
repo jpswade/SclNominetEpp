@@ -2,8 +2,9 @@
 
 namespace SclNominetEpp\Request\Poll;
 
+use InvalidArgumentException;
 use SclNominetEpp\Request;
-use SclNominetEpp\Response\Poll as PollResponse;
+use SclNominetEpp\Response\Poll\Poll as PollResponse;
 use SimpleXMLElement;
 
 /**
@@ -38,7 +39,7 @@ class Poll extends Request
     public function setOp(string $op)
     {
         if (!($op == self::OP_ACKNOWLEDGE || $op == self::OP_RETRIEVE)) {
-            throw new \InvalidArgumentException("The op \"$op\" is not legal, MUST be \"ack\" or \"req\".");
+            throw new InvalidArgumentException("The op \"$op\" is not legal, MUST be \"ack\" or \"req\".");
         }
         $this->op = $op;
     }

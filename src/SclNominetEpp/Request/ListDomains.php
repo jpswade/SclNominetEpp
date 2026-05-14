@@ -16,9 +16,9 @@ use SimpleXMLElement;
 class ListDomains extends Request
 {
     /**
-     * The month of the list element (also contains the year).
+     * Year-month period for the list request (e.g. "2024-3").
      */
-    protected int $month;
+    protected string $month;
 
     /**
      * Tells the parent class what the action of this request is.
