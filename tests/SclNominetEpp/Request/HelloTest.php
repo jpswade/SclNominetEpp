@@ -94,6 +94,6 @@ class HelloTest extends TestCase
         $xml = $this->request->getPacket();
 
         $expectedPattern = '/^<\?xml version="1\.0" encoding="UTF-8" standalone="no"\?>\s*<epp[^>]*>\s*<hello\/>\s*<\/epp>\s*$/s';
-        $this->assertRegExp($expectedPattern, $xml);
+        $this->assertMatchesRegularExpression($expectedPattern, $xml);
     }
 }
