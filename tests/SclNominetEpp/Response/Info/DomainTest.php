@@ -99,4 +99,57 @@ EOX;
 
         $this->assertEquals($expected, $domain);
     }
+
+    /**
+     * Nominet may omit domain:ns when there are no delegation nameservers;
+     * hostObj is then null and must not trigger foreach on null (PHP 8.2+).
+     */
+    public function testProcessDataWithNoNsElement(): void
+    {
+        $xml = <<<EOX
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<epp xmlns="urn:ietf:params:xml:ns:epp-1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/epp-1.0 epp-1.0.xsd">
+  <response>
+    <result code="1000">
+      <msg>Command completed successfully</msg>
+    </result>
+    <resData>
+      <domain:infData
+        xmlns:domain="urn:ietf:params:xml:ns:domain-1.0"
+        xsi:schemaLocation="urn:ietf:params:xml:ns:domain-1.0 domain-1.0.xsd">
+        <domain:name>chrisanstey.co.uk</domain:name>
+        <domain:roid>117523-UK</domain:roid>
+        <domain:registrant>559D2DD4B2862E89</domain:registrant>
+        <domain:clID>SCL</domain:clID>
+        <domain:crID>psamathe@nominet</domain:crID>
+        <domain:crDate>2013-01-31T00:11:05</domain:crDate>
+        <domain:exDate>2015-01-31T00:11:05</domain:exDate>
+      </domain:infData>
+    </resData>
+    <extension>
+      <domain-nom-ext:infData
+        xmlns:domain-nom-ext="http://www.nominet.org.uk/epp/xml/domain-nom-ext-1.2"
+        xsi:schemaLocation="http://www.nominet.org.uk/epp/xml/domain-nom-ext-1.2 domain-nom-ext-1.2.xsd">
+        <domain-nom-ext:reg-status>Registered until expiry date.</domain-nom-ext:reg-status>
+        <domain-nom-ext:first-bill>th</domain-nom-ext:first-bill>
+        <domain-nom-ext:recur-bill>th</domain-nom-ext:recur-bill>
+      </domain-nom-ext:infData>
+    </extension>
+    <trID>
+      <clTRID>EPP-SCL</clTRID>
+      <svTRID>204085</svTRID>
+    </trID>
+  </response>
+</epp>
+
+EOX;
+
+        $this->response->init($xml);
+        $domain = $this->response->getDomain();
+
+        $this->assertSame('chrisanstey.co.uk', $domain->getName());
+        $this->assertCount(0, $domain->getNameservers());
+    }
 }

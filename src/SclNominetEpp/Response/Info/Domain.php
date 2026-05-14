@@ -48,11 +48,12 @@ class Domain extends AbstractInfo
     protected function addInfData(SimpleXMLElement $infData)
     {
 
-        $nschildren = $infData->ns->hostObj;
-        foreach ($nschildren as $nschild) {
-            $nameserver = new Nameserver();
-            $nameserver->setHostName((string)$nschild);
-            $this->object->addNameserver($nameserver);
+        if (isset($infData->ns->hostObj)) {
+            foreach ($infData->ns->hostObj as $nschild) {
+                $nameserver = new Nameserver();
+                $nameserver->setHostName((string)$nschild);
+                $this->object->addNameserver($nameserver);
+            }
         }
 
         $this->object->setRegistrant($infData->registrant);
